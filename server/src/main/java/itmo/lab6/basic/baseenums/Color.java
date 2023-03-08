@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * The enum {@code Color} lists all the possible colors.
+ *
  * @author dorlneylon
  * @since ??.??.????
  */

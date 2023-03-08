@@ -58,51 +58,6 @@ public class Person implements Serializable {
     private Location location;
 
     /**
-     * Returns the name of the person.
-     *
-     * @return The name of the person.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Returns the birthday of the person.
-     *
-     * @return The birthday of the person.
-     */
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    /**
-     * Returns the height of the person.
-     *
-     * @return The height of the person.
-     */
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     * Returns the hair color of the person.
-     *
-     * @return The hair color of the person.
-     */
-    public Color getHairColor() {
-        return hairColor;
-    }
-
-    /**
-     * Returns the location of the person.
-     *
-     * @return The location of the person.
-     */
-    public Location getLocation() {
-        return location;
-    }
-
-    /**
      * Creates a new `Person` object with the specified parameters.
      *
      * @param name      The name of the person.
@@ -148,6 +103,15 @@ public class Person implements Serializable {
     }
 
     /**
+     * Returns the name of the person.
+     *
+     * @return The name of the person.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Sets the name of the person.
      *
      * @param name The name of the person.
@@ -156,8 +120,13 @@ public class Person implements Serializable {
         this.name = name;
     }
 
-    public boolean equals(Person p) {
-        return this.name.equals(p.name) && this.height == p.getHeight() && this.hairColor.equals(p.getHairColor()) && this.location.equals(p.getLocation());
+    /**
+     * Returns the birthday of the person.
+     *
+     * @return The birthday of the person.
+     */
+    public Date getBirthday() {
+        return birthday;
     }
 
     /**
@@ -170,12 +139,30 @@ public class Person implements Serializable {
     }
 
     /**
+     * Returns the height of the person.
+     *
+     * @return The height of the person.
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
      * Sets the height of the person.
      *
      * @param height The height of the person.
      */
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    /**
+     * Returns the hair color of the person.
+     *
+     * @return The hair color of the person.
+     */
+    public Color getHairColor() {
+        return hairColor;
     }
 
     /**
@@ -188,12 +175,25 @@ public class Person implements Serializable {
     }
 
     /**
+     * Returns the location of the person.
+     *
+     * @return The location of the person.
+     */
+    public Location getLocation() {
+        return location;
+    }
+
+    /**
      * Sets the location of the person.
      *
      * @param location The location of the person.
      */
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public boolean equals(Person p) {
+        return this.name.equals(p.name) && this.height == p.getHeight() && this.hairColor.equals(p.getHairColor()) && this.location.equals(p.getLocation());
     }
 
     /**

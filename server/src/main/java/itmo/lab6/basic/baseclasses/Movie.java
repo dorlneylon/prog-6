@@ -158,11 +158,25 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     /**
+     * Used to set the ID of the movie.
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
      * @return the name of the movie
      * @see Movie#name
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Used to set the name of the movie.
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -174,6 +188,15 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     /**
+     * Used to set the coordinates of the movie.
+     *
+     * @see Coordinates
+     */
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    /**
      * @return the creation date of the movie
      * @see Movie#creationDate
      */
@@ -182,11 +205,28 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     /**
+     * Used to set the creation date of the movie.
+     */
+    public void setCreationDate(java.time.ZonedDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    /**
      * @return the genre of the movie
      * @see Movie#genre
      */
     public MovieGenre getGenre() {
         return genre;
+    }
+
+    /**
+     * Used to set the genre of the movie.
+     *
+     * @see Movie#genre
+     * @see MovieGenre
+     */
+    public void setGenre(MovieGenre genre) {
+        this.genre = genre;
     }
 
     /**
@@ -199,6 +239,16 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     /**
+     * Used to set the director of the movie.
+     *
+     * @see Movie#director
+     * @see Person
+     */
+    public void setDirector(Person director) {
+        this.director = director;
+    }
+
+    /**
      * @return the amount of Oscars won by the movie.
      * @see Movie#oscarsCount()
      * @see MpaaRating
@@ -207,6 +257,16 @@ public class Movie implements Comparable<Movie>, Serializable {
     @Deprecated
     public long getOscarsCount() {
         return oscarsCount;
+    }
+
+    /**
+     * Used to set the amount of Oscars won by the movie.
+     *
+     * @param oscarsCount
+     * @see Movie#oscarsCount
+     */
+    public void setOscarsCount(long oscarsCount) {
+        this.oscarsCount = oscarsCount;
     }
 
     /**
@@ -227,42 +287,6 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     /**
-     * Used to set the name of the movie.
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Used to set the coordinates of the movie.
-     *
-     * @see Coordinates
-     */
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    /**
-     * Used to set the amount of Oscars won by the movie.
-     *
-     * @param oscarsCount
-     * @see Movie#oscarsCount
-     */
-    public void setOscarsCount(long oscarsCount) {
-        this.oscarsCount = oscarsCount;
-    }
-
-    /**
-     * Used to set the genre of the movie.
-     *
-     * @see Movie#genre
-     * @see MovieGenre
-     */
-    public void setGenre(MovieGenre genre) {
-        this.genre = genre;
-    }
-
-    /**
      * Used to set the MPAA rating of the movie.
      *
      * @see Movie#mpaaRating
@@ -270,30 +294,6 @@ public class Movie implements Comparable<Movie>, Serializable {
      */
     public void setMpaaRating(MpaaRating mpaaRating) {
         this.mpaaRating = mpaaRating;
-    }
-
-    /**
-     * Used to set the director of the movie.
-     *
-     * @see Movie#director
-     * @see Person
-     */
-    public void setDirector(Person director) {
-        this.director = director;
-    }
-
-    /**
-     * Used to set the creation date of the movie.
-     */
-    public void setCreationDate(java.time.ZonedDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * Used to set the ID of the movie.
-     */
-    public void setId(Long id) {
-        this.id = id;
     }
 
 //	/**

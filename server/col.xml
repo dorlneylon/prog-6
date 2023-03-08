@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MoviesCollection>
+    <Movie>
+        <id>1</id>
+        <name>The Shawshank Redemption</name>
+        <coordinates>
+            <x>23.3</x>
+            <y>256</y>
+        </coordinates>
+        <creation_date>2020-12-01T08:00:00Z</creation_date>
+        <oscars_count>4</oscars_count>
+        <genre>TRAGEDY</genre>
+        <mpaa_rating>R</mpaa_rating>
+        <director>
+            <name>Frank Darabont</name>
+            <birthday>28.12.1212</birthday>
+            <height>183</height>
+            <hair_color>BLACK</hair_color>
+            <location>
+                <x>34</x>
+                <y>67.8</y>
+                <z>23.1</z>
+            </location>
+        </director>
+    </Movie>
+</MoviesCollection>

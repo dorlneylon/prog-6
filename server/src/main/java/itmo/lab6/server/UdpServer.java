@@ -1,31 +1,22 @@
 package itmo.lab6.server;
 
-import itmo.lab6.basic.baseclasses.Movie;
-import itmo.lab6.basic.moviecollection.MovieCol;
+import itmo.lab6.basic.moviecollection.MovieCollection;
 import itmo.lab6.commands.CommandHandler;
-import itmo.lab6.server.utils.logger.LogLevel;
-import itmo.lab6.server.utils.logger.ServerLogger;
 
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 public class UdpServer {
+    private static final int BUFFER_SIZE = 1024;
+    public static MovieCollection collection;
     private final int port;
-    public static MovieCol collection;
-    private boolean isRunning = true;
-    private final int BUFFER_SIZE = 1024;
+    private InetSocketAddress clientAddress;
 
-    private static InetSocketAddress clientAddress;
-
-    public UdpServer(MovieCol collection, int port) {
+    public UdpServer(MovieCollection collection, int port) {
         this.port = port;
-        this.collection = collection;
+        UdpServer.collection = collection;
     }
 
     public void run() {
@@ -33,10 +24,10 @@ public class UdpServer {
             CommandHandler handler = new CommandHandler(channel);
 
             channel.configureBlocking(false);
-            ServerLogger.log("Starting server on port " + port, LogLevel.INFO);
+            ServerLogger.getLogger().info("Starting server on port " + port);
             channel.socket().bind(new InetSocketAddress(port));
             ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
-            while (isRunning) {
+            while (true) {
                 buffer.clear();
                 clientAddress = (InetSocketAddress) channel.receive(buffer);
                 if (clientAddress != null) {
@@ -45,11 +36,11 @@ public class UdpServer {
                     buffer.get(data);
                     String message = new String(data);
 
-                    ServerLogger.log("Received message from " + clientAddress.getAddress() + ": " + message, LogLevel.INFO);
+                    ServerLogger.getLogger().info("Received message from " + clientAddress.getAddress() + ": " + message);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            ServerLogger.getLogger().warning("Exception: " + e.getMessage());
         }
     }
 }

@@ -1,16 +1,13 @@
 package itmo.lab6.commands;
 
-import itmo.lab6.server.UdpServer;
-
 import java.io.IOException;
-import java.net.DatagramPacket;
 import java.nio.channels.DatagramChannel;
 
 public class CommandHandler {
     private static DatagramChannel channel;
 
     public CommandHandler(DatagramChannel channel) {
-        this.channel = channel;
+        CommandHandler.channel = channel;
     }
 
     public static void handlePacket(String message) throws IOException {

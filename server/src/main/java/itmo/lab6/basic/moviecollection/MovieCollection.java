@@ -1,5 +1,4 @@
-package itmo.lab6.collection;
-
+package itmo.lab6.basic.moviecollection;
 
 import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.baseclasses.Person;
@@ -7,6 +6,7 @@ import itmo.lab6.basic.baseenums.MpaaRating;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 /**
  * The MovieCol class is a collection based on HashMap that extends the MHMap class.
@@ -18,11 +18,11 @@ import java.util.Comparator;
  * @see Movie
  * @since 03.02.2023
  */
-public class MovieCol extends MHMap<Long, Movie> {
+public class MovieCollection extends MHMap<Long, Movie> {
     /**
      * Instantiates a new MovieCol object.
      */
-    public MovieCol() {
+    public MovieCollection() {
     }
 
     /**
@@ -31,10 +31,8 @@ public class MovieCol extends MHMap<Long, Movie> {
      * @see Movie
      * @see Person
      */
-    public void show() {
-        for (Movie movie : this.values()) {
-            System.out.println(movie.toString());
-        }
+    public String show() {
+        return Arrays.stream(this.values()).map(Movie::toString).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -47,7 +45,7 @@ public class MovieCol extends MHMap<Long, Movie> {
             if (key.compareTo(movie.oscarsCount()) < 0) this.rmByVal(movie);
     }
 
-    public boolean equals(MovieCol map) {
+    public boolean equals(MovieCollection map) {
         Movie[] a = this.values();
         Movie[] b = map.values();
         if (a.length != b.length) return false;
@@ -141,9 +139,9 @@ public class MovieCol extends MHMap<Long, Movie> {
 
     @Override
     public Movie[] sorted(boolean reverse) {
-        Movie[] values = this.values();
-        Arrays.sort(values, (reverse) ? Comparator.reverseOrder() : Comparator.naturalOrder());
-        return values;
+        Movie[] movies = this.values();
+        Arrays.sort(movies, (reverse) ? Comparator.reverseOrder() : Comparator.naturalOrder());
+        return movies;
     }
 
     /**

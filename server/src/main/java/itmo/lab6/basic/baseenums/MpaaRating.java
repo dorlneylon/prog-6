@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * The enum {@code MpaaRating} lists all the possible MPAA ratings.
+ *
  * @author dorlneylon
  * @since ??.??.????
  */

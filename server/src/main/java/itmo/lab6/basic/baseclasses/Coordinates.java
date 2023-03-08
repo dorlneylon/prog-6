@@ -1,5 +1,7 @@
 package itmo.lab6.basic.baseclasses;
 
+import java.io.Serializable;
+
 /**
  * The Coordinates class represents a pair of coordinates (x, y).
  * It implements the Serializable interface, allowing instances to be written to and read from streams.
@@ -8,7 +10,7 @@ package itmo.lab6.basic.baseclasses;
  * @version 1.0?
  * @since ??.??.????
  */
-public class Coordinates {
+public class Coordinates implements Serializable {
 	private float x;
 	private Integer y;
 
@@ -19,7 +21,7 @@ public class Coordinates {
 	 * @param y the y value of the coordinate
 	 */
 	public Coordinates(float x, Integer y) {
-		if (x < -520 || y > 256 || y == null) throw new IllegalArgumentException("Invalid coordinates");
+		if (x < -520 || y > 256) throw new IllegalArgumentException("Invalid coordinates");
 		this.x = x;
 		this.y = y;
 	}

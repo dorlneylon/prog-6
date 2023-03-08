@@ -1,60 +1,55 @@
 package itmo.lab6.server;
 
+import itmo.lab6.basic.baseclasses.Movie;
+import itmo.lab6.basic.moviecollection.MovieCol;
+import itmo.lab6.commands.CommandHandler;
 import itmo.lab6.server.utils.logger.LogLevel;
 import itmo.lab6.server.utils.logger.ServerLogger;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class UdpServer {
-
-    DatagramSocket socket;
-    DatagramPacket packet;
-
     private final int port;
-    private final InetAddress host;
+    public static MovieCol collection;
     private boolean isRunning = true;
+    private final int BUFFER_SIZE = 1024;
 
-    public UdpServer(int port) throws IOException {
-        DatagramChannel channel = DatagramChannel.open();
-        channel.configureBlocking(false);
+    private static InetSocketAddress clientAddress;
+
+    public UdpServer(MovieCol collection, int port) {
         this.port = port;
-        try {
-            host = InetAddress.getByName("localhost");
-        } catch (UnknownHostException e) {
-            ServerLogger.log("Unable to get host address", LogLevel.ERROR);
-            throw new RuntimeException(e);
-        }
+        this.collection = collection;
     }
 
-    public void run() throws SocketException {
-        ServerLogger.log("Starting server on port " + port, LogLevel.INFO);
-        socket = new DatagramSocket(port, host);
-        ServerLogger.log("Server is listening on port " + port, LogLevel.INFO);
-        while (isRunning) {
-            ServerLogger.log("Waiting for a UDP packet...", LogLevel.INFO);
-            packet = new DatagramPacket(new byte[1024], 1024);
-            try {
-                socket.receive(packet);
-            } catch (IOException e) {
-                ServerLogger.log("Failed to receive UDP packet", LogLevel.ERROR);
-                continue;
+    public void run() {
+        try (DatagramChannel channel = DatagramChannel.open()) {
+            CommandHandler handler = new CommandHandler(channel);
+
+            channel.configureBlocking(false);
+            ServerLogger.log("Starting server on port " + port, LogLevel.INFO);
+            channel.socket().bind(new InetSocketAddress(port));
+            ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
+            while (isRunning) {
+                buffer.clear();
+                clientAddress = (InetSocketAddress) channel.receive(buffer);
+                if (clientAddress != null) {
+                    buffer.flip();
+                    byte[] data = new byte[buffer.limit()];
+                    buffer.get(data);
+                    String message = new String(data);
+
+                    ServerLogger.log("Received message from " + clientAddress.getAddress() + ": " + message, LogLevel.INFO);
+                }
             }
-            displayPacketDetails(packet);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    }
-
-    private static void displayPacketDetails(DatagramPacket packet) {
-        byte[] msgBuffer = packet.getData();
-        int length = packet.getLength();
-        int offset = packet.getOffset();
-
-        int remotePort = packet.getPort();
-        InetAddress remoteAddr = packet.getAddress();
-        String msg = new String(msgBuffer, offset, length);
-
-        System.out.println("Received a  packet:[IP Address=" + remoteAddr
-                + ", port=" + remotePort + ", message=" + msg + "]");
     }
 }

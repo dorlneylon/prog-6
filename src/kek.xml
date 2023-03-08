@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Movies>
+	<Movie>
+		<id>1</id>
+		<name>The Shawshank Redemption</name>
+		<coordinates>
+			<x>23.3</x>
+			<y>256</y>
+		</coordinates>
+		<creationDate>2020-12-01T08:00:00Z</creationDate>
+		<oscarsCount>4</oscarsCount>
+		<genre>TRAGEDY</genre>
+		<mpaaRating>R</mpaaRating>
+		<director>
+			<name>Frank Darabont</name>
+			<birthday>28.12.1212</birthday>
+			<height>183</height>
+			<hairColor>BLACK</hairColor>
+			<location>
+				<x>34</x>
+				<y>67.8</y>
+				<z>23.1</z>
+			</location>
+		</director>
+	</Movie>
+	<Movie>
+		<id>2</id>
+		<name>The Shawshank Redemption</name>
+		<coordinates>
+			<x>23.3</x>
+			<y>256</y>
+		</coordinates>
+		<creationDate>2020-12-01T08:00:00Z</creationDate>
+		<oscarsCount>4</oscarsCount>
+		<genre>TRAGEDY</genre>
+		<mpaaRating>R</mpaaRating>
+		<director>
+			<name>Frank Darabont</name>
+			<birthday>28.12.1212</birthday>
+			<height>183</height>
+			<hairColor>BLACK</hairColor>
+			<location>
+				<x>34</x>
+				<y>67.8</y>
+				<z>23.1</z>
+			</location>
+		</director>
+	</Movie>
+	<Movie>
+		<id>3</id>
+		<name>The Shawshank Redemption</name>
+		<coordinates>
+			<x>23.3</x>
+			<y>256</y>
+		</coordinates>
+		<creationDate>2020-12-01T08:00:00Z</creationDate>
+		<oscarsCount>4</oscarsCount>
+		<genre>TRAGEDY</genre>
+		<mpaaRating>R</mpaaRating>
+		<director>
+			<name>Frank Darabont</name>
+			<birthday>28.12.1212</birthday>
+			<height>183</height>
+			<hairColor>BLACK</hairColor>
+			<location>
+				<x>34</x>
+				<y>67.8</y>
+				<z>23.1</z>
+			</location>
+		</director>
+	</Movie>
+	<Movie>
+		<id>4</id>
+		<name>Pulp Fiction</name>
+		<coordinates>
+			<x>1.0</x>
+			<y>1</y>
+		</coordinates>
+		<creationDate>2023-02-03T20:13:53.910193+03:00[Europe/Moscow]</creationDate>
+		<oscarsCount>5</oscarsCount>
+		<genre>COMEDY</genre>
+		<mpaaRating>NC_17</mpaaRating>
+		<director>
+			<name>Quentin Tarantino</name>
+			<birthday>11.11.1111</birthday>
+			<height>172</height>
+			<hairColor>BLACK</hairColor>
+			<location>
+				<x>5</x>
+				<y>5.0</y>
+				<z>5.0</z>
+			</location>
+		</director>
+	</Movie>
+	<Movie>
+		<id>5</id>
+		<name>asdf</name>
+		<coordinates>
+			<x>12.0</x>
+			<y>2</y>
+		</coordinates>
+		<creationDate>2023-02-09T23:22:14.395934+03:00[Europe/Moscow]</creationDate>
+		<oscarsCount>123</oscarsCount>
+		<genre>COMEDY</genre>
+		<mpaaRating>R</mpaaRating>
+		<director>
+			<name>asdf</name>
+			<birthday>11.11.1111</birthday>
+			<height>123</height>
+			<hairColor>RED</hairColor>
+			<location>
+				<x>1</x>
+				<y>11.0</y>
+				<z>1.0</z>
+			</location>
+		</director>
+	</Movie>
+</Movies>

@@ -1,3 +1,8 @@
 /server/target/
-/client/targer/
+*/.idea
+*/.project
+*/.classpath
+*/.settings
+.DS_Store
+/client/target/
 */**/.idea

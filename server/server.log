@@ -2,75 +2,99 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-03-09T08:41:57.737139Z</date>
-  <millis>1678351317737</millis>
-  <nanos>139000</nanos>
+  <date>2023-03-09T09:21:57.908321Z</date>
+  <millis>1678353717908</millis>
+  <nanos>321000</nanos>
   <sequence>0</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
+  <thread>19</thread>
   <message>Starting server on port 5050</message>
 </record>
 <record>
-  <date>2023-03-09T08:42:02.858113Z</date>
-  <millis>1678351322858</millis>
-  <nanos>113000</nanos>
+  <date>2023-03-09T09:22:03.772692Z</date>
+  <millis>1678353723772</millis>
+  <nanos>692000</nanos>
   <sequence>1</sequence>
   <logger>ServerLogger</logger>
-  <level>WARNING</level>
+  <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
-  <message>Cannot invoke "itmo.lab6.basic.auxiliary.Command.execute()" because the return value of "java.util.HashMap.get(Object)" is null</message>
+  <thread>19</thread>
+  <message>Received message from /127.0.0.1: hello world</message>
 </record>
 <record>
-  <date>2023-03-09T08:42:02.859111Z</date>
-  <millis>1678351322859</millis>
-  <nanos>111000</nanos>
+  <date>2023-03-09T09:22:03.774188Z</date>
+  <millis>1678353723774</millis>
+  <nanos>188000</nanos>
   <sequence>2</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
-  <message>Received message from /127.0.0.1: Hello World!</message>
+  <thread>19</thread>
+  <message>Received message from /127.0.0.1: show</message>
 </record>
 <record>
-  <date>2023-03-09T08:42:02.860259Z</date>
-  <millis>1678351322860</millis>
-  <nanos>259000</nanos>
+  <date>2023-03-09T09:22:03.777466Z</date>
+  <millis>1678353723777</millis>
+  <nanos>466000</nanos>
   <sequence>3</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
-  <message>Received message from /127.0.0.1: show</message>
+  <thread>19</thread>
+  <message>Received message from /127.0.0.1: info</message>
 </record>
 <record>
-  <date>2023-03-09T08:42:02.860792Z</date>
-  <millis>1678351322860</millis>
-  <nanos>792000</nanos>
+  <date>2023-03-09T09:24:46.426750Z</date>
+  <millis>1678353886426</millis>
+  <nanos>750000</nanos>
   <sequence>4</sequence>
   <logger>ServerLogger</logger>
-  <level>WARNING</level>
+  <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
-  <message>Cannot invoke "itmo.lab6.basic.auxiliary.Command.execute()" because the return value of "java.util.HashMap.get(Object)" is null</message>
+  <thread>19</thread>
+  <message>Received message from /172.28.85.96: hello хуесос</message>
 </record>
 <record>
-  <date>2023-03-09T08:42:02.861208Z</date>
-  <millis>1678351322861</millis>
-  <nanos>208000</nanos>
+  <date>2023-03-09T09:24:46.428934Z</date>
+  <millis>1678353886428</millis>
+  <nanos>934000</nanos>
   <sequence>5</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>18</thread>
-  <message>Received message from /127.0.0.1: info</message>
+  <thread>19</thread>
+  <message>Received message from /172.28.85.96: info</message>
+</record>
+<record>
+  <date>2023-03-09T09:24:46.429760Z</date>
+  <millis>1678353886429</millis>
+  <nanos>760000</nanos>
+  <sequence>6</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>19</thread>
+  <message>Received message from /172.28.85.96: show</message>
+</record>
+<record>
+  <date>2023-03-09T09:24:46.430379Z</date>
+  <millis>1678353886430</millis>
+  <nanos>379000</nanos>
+  <sequence>7</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>19</thread>
+  <message>Received message from /172.28.85.96: info</message>
 </record>
 </log>

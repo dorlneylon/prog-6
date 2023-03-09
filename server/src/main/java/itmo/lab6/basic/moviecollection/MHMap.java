@@ -213,20 +213,11 @@ public abstract class MHMap<K, V> {
      * elements' type, date of initialization, number of elements, etc.
      */
     public String info() {
-        Class<?> a = (this.isEmpty()) ? Object.class : this.map.entrySet().iterator().next().getClass();
+        Class<?> a = this.map.isEmpty() ? null : this.map.entrySet().stream().toList().get(0).getKey().getClass();
+        String keyTypeName = a == null ? "none" : a.getName();
         return  prcr + "Type: " + whcr + this.getClass().getName() + "\n" +
-                prcr + "Key type: " + whcr + a.getName() + "\n" +
+                prcr + "Key type: " + whcr + keyTypeName + "\n" +
                 prcr + "Date of initialization: " + whcr + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n" +
                 prcr + "Number of elements: " + whcr + this.size() + "\n";
-//        System.out.println(prcr + "Type: " + whcr + this.getClass().getName());
-//        Class<?> keyType = Object.class;
-//        if (!this.isEmpty()) {
-//            Map.Entry<?, ?> firstEntry = this.map.entrySet().iterator().next();
-//            keyType = firstEntry.getKey().getClass();
-//        }
-//        System.out.println(prcr + "Key type: " + whcr + keyType.getName());
-//        System.out.println(prcr + "Date of initialization: " + whcr + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-//        System.out.println(prcr + "Number of elements: " + whcr + this.size());
     }
-
 }

@@ -16,7 +16,8 @@ public class ServerMain {
         try {
             server.run();
         } catch (Exception e) {
-            // Попадает ли он сюда вообще??
+            // kxr: Попадает ли он сюда вообще??
+            // nyl: Нет, не попадает. Да и хуй с ним.
             System.err.println(e.getMessage());
         }
     }

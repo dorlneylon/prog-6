@@ -6,7 +6,11 @@ public class ClientMain {
         Connector connector = new Connector(5050);
         connector.send("Hello World!");
 		connector.send("show");
-        connector.receive();
+        String s = connector.receive();
+		System.out.println(s);
+        connector.send("info");
+        s = connector.receive();
+        System.out.println(s);
         connector.close();
     }
 }

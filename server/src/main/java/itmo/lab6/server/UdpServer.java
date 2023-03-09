@@ -8,11 +8,13 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
+import static itmo.lab6.commands.CommandHandler.handlePacket;
+
 public class UdpServer {
     private static final int BUFFER_SIZE = 1024;
     public static MovieCollection collection;
     private final int port;
-    private InetSocketAddress clientAddress;
+    public static InetSocketAddress clientAddress;
 
     public UdpServer(MovieCollection collection, int port) {
         this.port = port;
@@ -35,7 +37,12 @@ public class UdpServer {
                     byte[] data = new byte[buffer.limit()];
                     buffer.get(data);
                     String message = new String(data);
-
+                    try {
+                        handlePacket(message);
+                    } catch (Exception e) {
+                        channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
+                        ServerLogger.getLogger().warning(e.getMessage());
+                    }
                     ServerLogger.getLogger().info("Received message from " + clientAddress.getAddress() + ": " + message);
                 }
             }

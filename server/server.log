@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-03-09T08:41:57.737139Z</date>
+  <millis>1678351317737</millis>
+  <nanos>139000</nanos>
+  <sequence>0</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Starting server on port 5050</message>
+</record>
+<record>
+  <date>2023-03-09T08:42:02.858113Z</date>
+  <millis>1678351322858</millis>
+  <nanos>113000</nanos>
+  <sequence>1</sequence>
+  <logger>ServerLogger</logger>
+  <level>WARNING</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Cannot invoke "itmo.lab6.basic.auxiliary.Command.execute()" because the return value of "java.util.HashMap.get(Object)" is null</message>
+</record>
+<record>
+  <date>2023-03-09T08:42:02.859111Z</date>
+  <millis>1678351322859</millis>
+  <nanos>111000</nanos>
+  <sequence>2</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Received message from /127.0.0.1: Hello World!</message>
+</record>
+<record>
+  <date>2023-03-09T08:42:02.860259Z</date>
+  <millis>1678351322860</millis>
+  <nanos>259000</nanos>
+  <sequence>3</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Received message from /127.0.0.1: show</message>
+</record>
+<record>
+  <date>2023-03-09T08:42:02.860792Z</date>
+  <millis>1678351322860</millis>
+  <nanos>792000</nanos>
+  <sequence>4</sequence>
+  <logger>ServerLogger</logger>
+  <level>WARNING</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Cannot invoke "itmo.lab6.basic.auxiliary.Command.execute()" because the return value of "java.util.HashMap.get(Object)" is null</message>
+</record>
+<record>
+  <date>2023-03-09T08:42:02.861208Z</date>
+  <millis>1678351322861</millis>
+  <nanos>208000</nanos>
+  <sequence>5</sequence>
+  <logger>ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Received message from /127.0.0.1: info</message>
+</record>
+</log>

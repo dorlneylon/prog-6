@@ -1,5 +1,6 @@
 package itmo.lab6.commands.implemented;
 
+import itmo.lab6.commands.CommandHandler;
 import itmo.lab6.server.UdpServer;
 
 import java.io.IOException;
@@ -7,14 +8,14 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
 public class InfoCommand extends AbstractCommand {
-    DatagramChannel channel;
+    CommandHandler handler;
 
-    public InfoCommand(DatagramChannel channel) {
-        this.channel = channel;
+    public InfoCommand(CommandHandler handler) {
+        this.handler = handler;
     }
 
     @Override
     public void execute() throws IOException {
-        channel.send(ByteBuffer.wrap(UdpServer.collection.info().getBytes()), UdpServer.clientAddress);
+        handler.getChannel().send(ByteBuffer.wrap(UdpServer.collection.info().getBytes()), handler.getAddress());
     }
 }

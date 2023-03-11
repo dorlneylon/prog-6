@@ -8,7 +8,6 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
-import static itmo.lab6.commands.CommandHandler.handlePacket;
 
 public class UdpServer {
     private static final int BUFFER_SIZE = 1024;
@@ -23,8 +22,6 @@ public class UdpServer {
 
     public void run() {
         try (DatagramChannel channel = DatagramChannel.open()) {
-            CommandHandler handler = new CommandHandler(channel);
-
             channel.configureBlocking(false);
             ServerLogger.getLogger().info("Starting server on port " + port);
             channel.socket().bind(new InetSocketAddress(port));
@@ -33,12 +30,13 @@ public class UdpServer {
                 buffer.clear();
                 clientAddress = (InetSocketAddress) channel.receive(buffer);
                 if (clientAddress != null) {
+                    CommandHandler handler = new CommandHandler(channel, clientAddress);
                     buffer.flip();
                     byte[] data = new byte[buffer.limit()];
                     buffer.get(data);
                     String message = new String(data);
                     try {
-                        handlePacket(message);
+                        handler.handlePacket(message);
                     } catch (Exception e) {
                         channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
                         ServerLogger.getLogger().warning(e.getMessage());

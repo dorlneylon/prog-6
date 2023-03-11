@@ -1,6 +1,7 @@
 package itmo.lab6.commands.implemented;
 
 import itmo.lab6.basic.auxiliary.Command;
+import itmo.lab6.basic.moviecollection.MovieCollection;
 
 import java.io.IOException;
 

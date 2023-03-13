@@ -27,7 +27,6 @@ public class CommandHandler {
         commands.put(DEFAULT, new DefaultCommand(this));
         commands.put(HELP, new HelpCommand(this));
         commands.put(EXIT, new ExitCommand(this));
-        commands.put(INSERT, new InsertCommand(this));
     }
 
     public static CommandEnum cast(String message) {

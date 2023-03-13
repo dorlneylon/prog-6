@@ -26,7 +26,6 @@ public class HelpCommand extends AbstractCommand {
                 prcr + "update " + blcr + "<id> {element}:" + whcr + " update the value of a collection element whose id is equal to the specified\n" +
                 prcr + "remove_key" + blcr +" <id>:" + whcr + " delete an element from the collection by its key\n" +
                 prcr + "clear:" + whcr + " clear the collection\n" +
-                prcr + "save " + blcr + "<filename>:" + whcr + " save the collection to a file. USE RELATIVE PATHS.\n" +
                 prcr + "execute_script" + blcr + " <file_name>:" + whcr + " read and execute the script from the specified file. The script contains commands in the same form in which they are entered by the user in interactive mode. USE RELATIVE PATHS.\n" +
                 prcr + "exit:" + whcr + " terminate the program (without saving to a file)\n" +
                 prcr + "remove_greater" + blcr + " <Oscars>:" + whcr + " remove from the collection all elements exceeding the specified\n" +

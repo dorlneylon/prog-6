@@ -9,5 +9,5 @@ public abstract class AbstractCommand implements Command {
 
     public AbstractCommand() {}
 
-    public abstract void execute() throws IOException;
+    public abstract void execute() throws Exception;
 }

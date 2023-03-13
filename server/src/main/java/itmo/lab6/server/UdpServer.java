@@ -38,6 +38,7 @@ public class UdpServer {
                     try {
                         handler.handlePacket(message);
                     } catch (Exception e) {
+                        e.printStackTrace();
                         channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
                         ServerLogger.getLogger().warning(e.getMessage());
                     }

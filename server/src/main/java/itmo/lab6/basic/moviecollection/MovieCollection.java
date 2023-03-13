@@ -33,7 +33,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @see Person
      */
     public String show() {
-        return Arrays.stream(this.values()).map(Movie::toString).collect(Collectors.joining("\n"));
+        return Arrays.stream(this.values()).map(Movie::info).collect(Collectors.joining("\n"));
     }
 
     /**

@@ -1,20 +1,13 @@
 package itmo.lab6.commands.implemented;
 
-import itmo.lab6.basic.auxiliary.Command;
-import itmo.lab6.server.UdpServer;
+import itmo.lab6.commands.Action;
+import itmo.lab6.server.respones.Response;
+import itmo.lab6.server.respones.ResponseType;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.DatagramChannel;
-
-public class DefaultCommand extends AbstractCommand {
-    private DatagramChannel channel;
-    public DefaultCommand(DatagramChannel channel) {
-        this.channel = channel;
-    }
+public class DefaultCommand implements Action {
 
     @Override
-    public void execute() throws IOException {
-        channel.send(ByteBuffer.wrap("пошел нахуй".getBytes()), UdpServer.clientAddress);
+    public Response run() {
+        return new Response("Unknown command. To view command list use command 'help'", ResponseType.INFO);
     }
 }

@@ -1,4 +1,5 @@
 package itmo.lab6.connection;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -22,8 +23,11 @@ public class Connector {
     }
 
     public void send(String message) throws Exception {
-        this.buffer = message.getBytes();
-        DatagramPacket packet = new DatagramPacket(this.buffer, this.buffer.length, this.address, port);
+        this.send(message.getBytes());
+    }
+
+    public void send(byte[] bytes) throws Exception {
+        DatagramPacket packet = new DatagramPacket(bytes, bytes.length, this.address, port);
         this.socket.send(packet);
     }
 

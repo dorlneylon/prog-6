@@ -14,7 +14,7 @@ public class UdpServer {
     private static final int BUFFER_SIZE = 1024;
     public static MovieCollection collection;
     private final int port;
-    public static InetSocketAddress clientAddress;
+    // public static InetSocketAddress clientAddress;
 
     public UdpServer(MovieCollection collection, int port) {
         this.port = port;
@@ -31,19 +31,18 @@ public class UdpServer {
             ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
             while (true) {
                 buffer.clear();
-                clientAddress = (InetSocketAddress) channel.receive(buffer);
+                InetSocketAddress clientAddress = (InetSocketAddress) channel.receive(buffer);
                 if (clientAddress != null) {
                     buffer.flip();
                     byte[] data = new byte[buffer.limit()];
                     buffer.get(data);
-                    String message = new String(data);
                     try {
-                        handlePacket(message);
+                        handlePacket(clientAddress, data);
                     } catch (Exception e) {
                         channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
                         ServerLogger.getLogger().warning(e.getMessage());
                     }
-                    ServerLogger.getLogger().info("Received message from " + clientAddress.getAddress() + ": " + message);
+                    // ServerLogger.getLogger().info("Received message from " + clientAddress.getAddress() + ": " + message);
                 }
             }
         } catch (IOException e) {

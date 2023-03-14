@@ -3,8 +3,7 @@ package itmo.lab6.commands.implemented;
 import itmo.lab6.commands.Action;
 import itmo.lab6.server.respones.Response;
 
-public class ShowCommand implements Action {
-
+public class ExitCommand implements Action {
     @Override
     public Response run() {
         return null;

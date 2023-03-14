@@ -2,99 +2,63 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-03-09T09:21:57.908321Z</date>
-  <millis>1678353717908</millis>
-  <nanos>321000</nanos>
+  <date>2023-03-12T12:05:24.148545Z</date>
+  <millis>1678622724148</millis>
+  <nanos>545000</nanos>
   <sequence>0</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>19</thread>
+  <thread>22</thread>
   <message>Starting server on port 5050</message>
 </record>
 <record>
-  <date>2023-03-09T09:22:03.772692Z</date>
-  <millis>1678353723772</millis>
-  <nanos>692000</nanos>
+  <date>2023-03-12T12:06:12.515591Z</date>
+  <millis>1678622772515</millis>
+  <nanos>591000</nanos>
   <sequence>1</sequence>
   <logger>ServerLogger</logger>
-  <level>INFO</level>
+  <level>WARNING</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /127.0.0.1: hello world</message>
+  <thread>22</thread>
+  <message>Illegal base64 character 2e</message>
 </record>
 <record>
-  <date>2023-03-09T09:22:03.774188Z</date>
-  <millis>1678353723774</millis>
-  <nanos>188000</nanos>
+  <date>2023-03-12T12:06:13.249541Z</date>
+  <millis>1678622773249</millis>
+  <nanos>541000</nanos>
   <sequence>2</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /127.0.0.1: show</message>
+  <thread>22</thread>
+  <message>Received message from /127.0.0.1: insert itmo.lab6.basic.baseclasses.Movie@4a7b17cc</message>
 </record>
 <record>
-  <date>2023-03-09T09:22:03.777466Z</date>
-  <millis>1678353723777</millis>
-  <nanos>466000</nanos>
+  <date>2023-03-12T12:06:29.473448Z</date>
+  <millis>1678622789473</millis>
+  <nanos>448000</nanos>
   <sequence>3</sequence>
   <logger>ServerLogger</logger>
-  <level>INFO</level>
+  <level>WARNING</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /127.0.0.1: info</message>
+  <thread>22</thread>
+  <message>Input byte[] should at least have 2 bytes for base64 bytes</message>
 </record>
 <record>
-  <date>2023-03-09T09:24:46.426750Z</date>
-  <millis>1678353886426</millis>
-  <nanos>750000</nanos>
+  <date>2023-03-12T12:06:29.479339Z</date>
+  <millis>1678622789479</millis>
+  <nanos>339000</nanos>
   <sequence>4</sequence>
   <logger>ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /172.28.85.96: hello хуесос</message>
-</record>
-<record>
-  <date>2023-03-09T09:24:46.428934Z</date>
-  <millis>1678353886428</millis>
-  <nanos>934000</nanos>
-  <sequence>5</sequence>
-  <logger>ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.server.UdpServer</class>
-  <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /172.28.85.96: info</message>
-</record>
-<record>
-  <date>2023-03-09T09:24:46.429760Z</date>
-  <millis>1678353886429</millis>
-  <nanos>760000</nanos>
-  <sequence>6</sequence>
-  <logger>ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.server.UdpServer</class>
-  <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /172.28.85.96: show</message>
-</record>
-<record>
-  <date>2023-03-09T09:24:46.430379Z</date>
-  <millis>1678353886430</millis>
-  <nanos>379000</nanos>
-  <sequence>7</sequence>
-  <logger>ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.server.UdpServer</class>
-  <method>run</method>
-  <thread>19</thread>
-  <message>Received message from /172.28.85.96: info</message>
+  <thread>22</thread>
+  <message>Received message from /127.0.0.1: insert 5</message>
 </record>
 </log>

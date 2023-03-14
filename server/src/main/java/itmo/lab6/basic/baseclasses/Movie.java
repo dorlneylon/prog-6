@@ -322,13 +322,7 @@ public class Movie implements Comparable<Movie>, Serializable {
         return coordinates.equals(movie.getCoordinates()) && name.equals(movie.getName()) && oscarsCount == movie.oscarsCount() && genre == movie.getGenre() && mpaaRating == movie.getRating() && director.equals(movie.getDirector());
     }
 
-    /**
-     * Used to print the movie info.
-     *
-     * @return the movie info
-     * @see Person#toString()
-     */
-    public String toString() {
+    public String info() {
         return id + ".\n" + prcr + "Film's title: " + whcr + name + ",\n" + prcr + "Film's coords: " + whcr + coordinates + ",\n" + prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n" + prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n" + prcr + "Genre: " + whcr + genre + ",\n" + prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
     }
 }

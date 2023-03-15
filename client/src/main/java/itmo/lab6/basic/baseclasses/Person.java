@@ -3,6 +3,7 @@ package itmo.lab6.basic.baseclasses;
 import itmo.lab6.basic.auxiliary.Randomness;
 import itmo.lab6.basic.baseenums.Color;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,6 +18,8 @@ import java.util.Date;
  * @since 1999
  */
 public class Person implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 6529685098267757690L;
 	/**
 	 * A constant to represent the white color code in ANSI escape codes.
 	 */
@@ -197,14 +200,7 @@ public class Person implements Serializable {
 		this.location = location;
 	}
 
-	/**
-	 * Returns a string representation of the `Person` object.
-	 *
-	 * @return A string representation of the `Person` object.
-	 * @see Movie#toString()
-	 */
-	@Override
-	public String toString() {
+	public String info() {
 		String birthday = new java.text.SimpleDateFormat("dd.MM.yyyy").format(this.birthday);
 		return prcr + "Director's name: " + whcr + name
 			 + prcr + ",\nDirector's location: " + whcr + location

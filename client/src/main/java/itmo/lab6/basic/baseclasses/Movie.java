@@ -4,6 +4,8 @@ import itmo.lab6.basic.auxiliary.Randomness;
 import itmo.lab6.basic.baseenums.MovieGenre;
 import itmo.lab6.basic.baseenums.MpaaRating;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -14,7 +16,9 @@ import java.time.format.DateTimeFormatter;
  * @version 99999999.9999999
  * @since 2023-02-02
  */
-public class Movie implements Comparable<Movie> {
+public class Movie implements Comparable<Movie>, Serializable {
+	@Serial
+	private static final long serialVersionUID = 6529685098267757690L;
 	/**
 	 * Reset the ANSI color.
 	 */
@@ -105,6 +109,18 @@ public class Movie implements Comparable<Movie> {
 		this.creationDate = java.time.ZonedDateTime.now();
 	}
 
+	public Movie(Long id, String name, Coordinates coordinates, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person director) {
+		if (name == null || name.isEmpty() || coordinates == null || oscarsCount == null || oscarsCount < 0 || genre == null || mpaaRating == null || director == null) throw new IllegalArgumentException("The fields can't be null or empty sequences.");
+		this.id = id;
+		this.name = name;
+		this.coordinates = coordinates;
+		this.oscarsCount = oscarsCount;
+		this.genre = genre;
+		this.mpaaRating = mpaaRating;
+		this.director = director;
+		this.creationDate = java.time.ZonedDateTime.now();
+	}
+
 	/**
 	 * Constructs a `Movie` instance with the specified ID, name, coordinates, creation date,
 	 * number of Oscars, genre, MPAA rating, and director.
@@ -139,7 +155,7 @@ public class Movie implements Comparable<Movie> {
 	 * @see Movie#Movie(String name, Coordinates coordinates, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person director)
 	 */
 	public Movie(String name) {
-		if (name == null || name.isEmpty() || coordinates == null || genre == null || mpaaRating == null || director == null) throw new IllegalArgumentException("The fields can't be null or empty sequences.");
+		//if (name == null || name.isEmpty() || coordinates == null || genre == null || mpaaRating == null || director == null) throw new IllegalArgumentException("The fields can't be null or empty sequences.");
 		this.id = nextId++;
 		this.name = name;
 		this.creationDate = java.time.ZonedDateTime.now();
@@ -339,10 +355,10 @@ public class Movie implements Comparable<Movie> {
 	 */
 	public String toString() {
 		return id + ".\n" + prcr + "Film's title: " + whcr + name + ",\n"
-			+ prcr + "Film's coords: " + whcr + coordinates + ",\n" 
+			+ prcr + "Film's coords: " + whcr + coordinates + ",\n"
 			+ prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n"
 			+ prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n"
 			+ prcr + "Genre: " + whcr + genre + ",\n"
-			+ prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
+			+ prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.info();
 	}
 }

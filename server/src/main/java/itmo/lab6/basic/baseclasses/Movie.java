@@ -3,6 +3,7 @@ package itmo.lab6.basic.baseclasses;
 import itmo.lab6.basic.baseenums.MovieGenre;
 import itmo.lab6.basic.baseenums.MpaaRating;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +16,8 @@ import java.time.format.DateTimeFormatter;
  * @since 2023-02-02
  */
 public class Movie implements Comparable<Movie>, Serializable {
+    @Serial
+    private static final long serialVersionUID = 6529685098267757690L;
     /**
      * Reset the ANSI color.
      */
@@ -323,6 +326,6 @@ public class Movie implements Comparable<Movie>, Serializable {
     }
 
     public String info() {
-        return id + ".\n" + prcr + "Film's title: " + whcr + name + ",\n" + prcr + "Film's coords: " + whcr + coordinates + ",\n" + prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n" + prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n" + prcr + "Genre: " + whcr + genre + ",\n" + prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
+        return id + ".\n" + prcr + "Film's title: " + whcr + name + ",\n" + prcr + "Film's coords: " + whcr + coordinates + ",\n" + prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n" + prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n" + prcr + "Genre: " + whcr + genre + ",\n" + prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.info();
     }
 }

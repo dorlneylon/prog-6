@@ -1,4 +1,4 @@
-package itmo.lab6.server.respones;
+package itmo.lab6.server.response;
 
 /**
  * This class is used to represent server response.

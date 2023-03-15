@@ -11,7 +11,7 @@ import java.nio.channels.DatagramChannel;
 import static itmo.lab6.commands.CommandHandler.handlePacket;
 
 public class UdpServer {
-    private static final int BUFFER_SIZE = 1024;
+    private static final int BUFFER_SIZE = 4096;
     public static MovieCollection collection;
     private final int port;
     // public static InetSocketAddress clientAddress;
@@ -42,7 +42,6 @@ public class UdpServer {
                         channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
                         ServerLogger.getLogger().warning(e.getMessage());
                     }
-                    // ServerLogger.getLogger().info("Received message from " + clientAddress.getAddress() + ": " + message);
                 }
             }
         } catch (IOException e) {

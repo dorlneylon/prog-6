@@ -1,5 +1,6 @@
 package itmo.lab6.basic.baseclasses;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**

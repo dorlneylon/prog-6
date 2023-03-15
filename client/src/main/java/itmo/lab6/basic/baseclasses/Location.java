@@ -1,5 +1,8 @@
 package itmo.lab6.basic.baseclasses;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 /**
  * Class representing a location in three-dimensional space.
  *
@@ -7,8 +10,7 @@ package itmo.lab6.basic.baseclasses;
  * @version 1.0
  * @since ???
  */
-public class Location {
-
+public class Location implements Serializable {
 	private long x;
 	private Double y;
 	private double z;

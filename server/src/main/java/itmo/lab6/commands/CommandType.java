@@ -20,7 +20,8 @@ public enum CommandType implements Serializable {
     REMOVE_IF_LOWER(RemoveLowerCommand.class, "replace_if_lower <id> {element}: replace the value by key if the new value is less than the old one."),
     REMOVE_KEY(RemoveKeyCommand.class, "remove_key <id>: delete an element from the collection by its key"),
     SHOW(ShowCommand.class, "show: output to the standard output stream all elements of the collection in the string representation"),
-    UPDATE(UpdateCommand.class, "update <id> {element}: update the value of a collection element whose id is equal to the specified");
+    UPDATE(UpdateCommand.class, "update <id> {element}: update the value of a collection element whose id is equal to the specified"),
+    SERVICE(ServiceCommand.class, "");
     private final Class<? extends Action> executableClass;
     private final String description;
 

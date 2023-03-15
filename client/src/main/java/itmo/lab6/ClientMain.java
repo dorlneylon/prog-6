@@ -7,6 +7,7 @@ import itmo.lab6.commands.CommandType;
 import itmo.lab6.connection.Connector;
 import itmo.lab6.basic.baseclasses.Movie;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
@@ -21,12 +22,11 @@ public class ClientMain {
 			ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
 			ObjectOutputStream oos1 = new ObjectOutputStream(baos1);
 			if (command.split(" ").length > 1) {
-				if (command.split(" ")[0].equals("insert")) {
-					Movie movie = Parser.readObject(Movie.class);
-					movie.setId(Long.parseLong(command.split(" ")[1]));
-					oos1.writeObject(new Command(cast(command), movie));
+				switch (command.split(" ")[0]) {
+					case "insert" -> oos1.writeObject(new Command(cast(command), setId(Parser.readObject(Movie.class), Long.parseLong(command.split(" ")[1]))));
+					case "update" -> update(command, oos1, connector);
+					default -> oos1.writeObject(new Command(cast(command)));
 				}
-				else oos1.writeObject(new Command(cast(command), "TODO"));
 			}
 			else oos1.writeObject(new Command(cast(command)));
 			oos1.flush();
@@ -38,5 +38,29 @@ public class ClientMain {
 
 	public static CommandType cast(String message) {
 		return (Convertible.convert(message.split(" ")[0], CommandType.class) != null) ? Convertible.convert(message.split(" ")[0], CommandType.class) : CommandType.DEFAULT;
+	}
+
+	public static void update(String command, ObjectOutputStream oos1, Connector connector) throws Exception {
+		ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
+		ObjectOutputStream oos2 = new ObjectOutputStream(baos2);
+		oos2.writeObject(new Command(CommandType.SERVICE, "check_id " + command.split(" ")[1]));
+		oos2.flush();
+		connector.send(baos2.toByteArray());
+		boolean isExist = Boolean.parseBoolean(connector.receive());
+		if (!isExist) {
+			System.out.println("No such element in the collection");
+			oos1.close();
+			oos1.writeObject(new Command(CommandType.SERVICE, ""));
+			return;
+		}
+		oos2.close();
+		oos1.close();
+		oos1.writeObject(new Command(cast(command), setId(Parser.readObject(Movie.class), Long.parseLong(command.split(" ")[1]))));
+		oos1.flush();
+	}
+
+	public static Movie setId(Movie movie, Long id) {
+		movie.setId(id);
+		return movie;
 	}
 }

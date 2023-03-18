@@ -133,7 +133,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @param key the key to check
      * @return true if the key is in the collection, false otherwise
      */
-    public boolean isContainsKey(Long key) {
+    public boolean isKeyPresented(Long key) {
         return this.getMap().containsKey(key);
     }
 

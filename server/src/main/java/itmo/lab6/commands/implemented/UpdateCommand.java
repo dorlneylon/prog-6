@@ -16,7 +16,7 @@ public class UpdateCommand implements Action {
 
     @Override
     public Response run() {
-        if (!collection.isContainsKey(movie.getId())) return new Response("Collection does not contain such a key", ResponseType.SUCCESS);
+        if (!collection.isKeyPresented(movie.getId())) return new Response("Collection does not contain such a key", ResponseType.SUCCESS);
         collection.update(movie);
 
         return new Response("update was completed successfully", ResponseType.SUCCESS);

@@ -16,7 +16,7 @@ public final class ServiceCommand implements Action {
     @Override
     public Response run() {
         return switch (command.split(" ")[0]) {
-            case "check_id" -> new Response(Boolean.toString(collection.isContainsKey(Long.parseLong(command.split(" ")[1]))), ResponseType.SUCCESS);
+            case "check_id" -> new Response(Boolean.toString(collection.isKeyPresented(Long.parseLong(command.split(" ")[1]))), ResponseType.SUCCESS);
             default -> new Response("", ResponseType.SUCCESS);
         };
     }

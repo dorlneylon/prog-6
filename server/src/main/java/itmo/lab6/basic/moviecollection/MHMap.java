@@ -72,7 +72,7 @@ public abstract class MHMap<K, V> {
      * remove the value by the key
      */
     public boolean removeByKey(K key) {
-        if (isContainsKey(key)) {
+        if (isKeyPresented(key)) {
             this.map.remove(key);
             return true;
         }
@@ -128,7 +128,7 @@ public abstract class MHMap<K, V> {
      * update the value by the key
      */
     public void update(K key, V value) {
-        if (isContainsKey(key)) {
+        if (isKeyPresented(key)) {
             this.map.put(key, value);
             System.out.println("Done!");
         } else System.out.println("No such value");
@@ -177,7 +177,7 @@ public abstract class MHMap<K, V> {
     /**
      * check if the map contains a certain key
      */
-    protected boolean isContainsKey(K key) {
+    protected boolean isKeyPresented(K key) {
         return this.map.containsKey(key);
     }
 

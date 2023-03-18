@@ -23,8 +23,7 @@ public class UdpServer {
 
     public void run() {
         try (DatagramChannel channel = DatagramChannel.open()) {
-            CommandHandler handler = new CommandHandler(channel);
-
+            CommandHandler.setChannel(channel);
             channel.configureBlocking(false);
             ServerLogger.getLogger().info("Starting server on port " + port);
             channel.socket().bind(new InetSocketAddress(port));

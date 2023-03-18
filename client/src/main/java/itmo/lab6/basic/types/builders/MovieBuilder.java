@@ -5,44 +5,37 @@ import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.baseclasses.Person;
 import itmo.lab6.basic.baseenums.MovieGenre;
 import itmo.lab6.basic.baseenums.MpaaRating;
-import itmo.lab6.basic.utils.annotations.*;
+import itmo.lab6.basic.types.builders.annotations.Generated;
+import itmo.lab6.basic.types.builders.annotations.NotNull;
+import itmo.lab6.basic.types.builders.annotations.Value;
 
-/**
- * Builder for Product. Used for creating Product objects, while parsing XML.
- *
- * @see Builder
- */
-public final class MovieBuilder implements Builder {
-    @Value
-    @Unique
-    @Generated
+import java.time.ZonedDateTime;
+
+public class MovieBuilder implements Builder {
+    @NotNull
+    @Value(min = 0)
     private Long id;
-
-    @NonNull
+    @NotNull
     private String name;
 
-    @NonNull
+    @NotNull
     private Coordinates coordinates;
-
-    @NonNull
+    @NotNull
     @Generated
-    private java.time.ZonedDateTime creationDate;
+    private ZonedDateTime creationDate;
 
-    @Value
-    @NonNull
+    @Value(min = 0)
     private long oscarsCount;
 
-    @NonNull
+    @NotNull
     private MovieGenre genre;
-
-    @NonNull
+    @NotNull
     private MpaaRating mpaaRating;
-
-    @NonNull
+    @NotNull
     private Person director;
 
     @Override
     public Movie build() {
-        return new Movie(id, name, coordinates, oscarsCount, genre, mpaaRating, director);
+        return new Movie(id, name, coordinates, creationDate, oscarsCount, genre, mpaaRating, director);
     }
 }

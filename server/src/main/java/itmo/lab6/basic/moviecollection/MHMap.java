@@ -2,9 +2,7 @@ package itmo.lab6.basic.moviecollection;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * The abstract class {@code MHMap} is a wrapper for the {@code HashMap} class.
@@ -74,7 +72,7 @@ public abstract class MHMap<K, V> {
      * remove the value by the key
      */
     public boolean removeByKey(K key) {
-        if (containsKey(key)) {
+        if (isContainsKey(key)) {
             this.map.remove(key);
             return true;
         } else return false;
@@ -129,7 +127,7 @@ public abstract class MHMap<K, V> {
      * update the value by the key
      */
     public void update(K key, V value) {
-        if (containsKey(key)) {
+        if (isContainsKey(key)) {
             this.map.put(key, value);
             System.out.println("Done!");
         } else System.out.println("No such value");
@@ -178,7 +176,7 @@ public abstract class MHMap<K, V> {
     /**
      * check if the map contains a certain key
      */
-    protected boolean containsKey(K key) {
+    protected boolean isContainsKey(K key) {
         return this.map.containsKey(key);
     }
 

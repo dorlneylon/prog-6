@@ -5,7 +5,7 @@ import itmo.lab6.server.UdpServer;
 import itmo.lab6.server.response.Response;
 import itmo.lab6.server.response.ResponseType;
 
-public class InfoCommand implements Action {
+public final class InfoCommand implements Action {
 
     @Override
     public Response run() {

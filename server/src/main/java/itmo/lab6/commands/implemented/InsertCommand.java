@@ -7,8 +7,8 @@ import itmo.lab6.server.response.ResponseType;
 
 import static itmo.lab6.server.UdpServer.collection;
 
-public class InsertCommand implements Action {
-    private Movie movie;
+public final class InsertCommand implements Action {
+    private final Movie movie;
 
     public InsertCommand(Movie movie) {
         this.movie = movie;

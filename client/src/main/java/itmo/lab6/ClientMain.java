@@ -7,8 +7,8 @@ import itmo.lab6.commands.CommandType;
 import itmo.lab6.connection.Connector;
 import itmo.lab6.basic.baseclasses.Movie;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ClientMain {
@@ -17,13 +17,15 @@ public class ClientMain {
 		Scanner sc = new Scanner(System.in);
 
 		while (true) {
-			System.out.println("Enter command:");
+			System.out.print("Enter command: ");
 			String command = sc.nextLine();
 			ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
 			ObjectOutputStream oos1 = new ObjectOutputStream(baos1);
 			if (command.split(" ").length > 1) {
 				switch (command.split(" ")[0]) {
-					case "insert" -> oos1.writeObject(new Command(cast(command), setId(Parser.readObject(Movie.class), Long.parseLong(command.split(" ")[1]))));
+					case "insert" -> oos1.writeObject(new Command(cast(command),
+							setId(Objects.requireNonNull(Parser.readObject(Movie.class)),
+									Long.parseLong(command.split(" ")[1]))));
 					case "update" -> update(command, oos1, connector);
 					default -> oos1.writeObject(new Command(cast(command)));
 				}

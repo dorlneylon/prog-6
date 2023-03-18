@@ -3,6 +3,8 @@ package itmo.lab6.basic.utils.generators;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.ZonedDateTime;
+
 /**
  * Time class. Used to get current time. +4 hours from UTC
  *
@@ -17,5 +19,9 @@ public final class Time {
     @Contract(" -> new")
     public static java.time.@NotNull LocalDateTime getTime() {
         return java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Moscow"));
+    }
+
+    public static ZonedDateTime getZonedDateTime() {
+        return ZonedDateTime.now(java.time.ZoneId.of("Europe/Moscow"));
     }
 }

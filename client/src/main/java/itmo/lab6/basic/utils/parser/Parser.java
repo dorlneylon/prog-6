@@ -2,10 +2,8 @@ package itmo.lab6.basic.utils.parser;
 
 import itmo.lab6.basic.Constants;
 import itmo.lab6.basic.types.builders.Builder;
-import itmo.lab6.basic.utils.annotations.Generated;
-import itmo.lab6.basic.utils.annotations.Length;
-import itmo.lab6.basic.utils.annotations.NonNull;
-import itmo.lab6.basic.utils.annotations.Value;
+import itmo.lab6.basic.types.builders.annotations.Generated;
+import itmo.lab6.basic.types.builders.annotations.Value;
 import itmo.lab6.basic.utils.generators.IdGenerator;
 import itmo.lab6.basic.utils.generators.Time;
 import itmo.lab6.basic.utils.strings.StringUtils;
@@ -29,7 +27,7 @@ public class Parser {
      * and creates object using builder.
      * <p>
      * Also, it uses annotations to validate input data.
-     * <p>List of annotations: {@link Value}, {@link Length}, {@link NonNull}, {@link Generated}.
+     * <p>List of annotations: {@link Value}, {@link NotNull}, {@link Generated}.
      *
      * @param objectType Type of object to read.
      * @param <T>        Generic type of object to read.
@@ -60,6 +58,7 @@ public class Parser {
             // If field is Enum then converting string value to Enum<?> value.
             if (field.getType().isEnum()) {
                 System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), field.getType().getSimpleName());
+                System.out.printf("\u001B[35mEnum constants: %s\u001B[0m %n", Arrays.toString(field.getType().getEnumConstants()));
                 while (true) {
                     System.out.print(">: ");
                     String value;
@@ -88,7 +87,7 @@ public class Parser {
 
             // if field type is built-in type or String then read it
             switch (field.getType().getSimpleName()) {
-                case "Date", "date" -> readDate("Date", field, object);
+                case "Date", "date" -> readDate(field, object);
                 case "Integer", "int" -> readNumber("Integer", field, object);
                 case "Long", "long" -> readNumber("Long", field, object);
                 case "Double", "double" -> readNumber("Double", field, object);
@@ -127,6 +126,7 @@ public class Parser {
         return (T) object.build();
     }
 
+
     private static void readNumber(String numType, Field field, Builder object) {
         System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), numType);
         while (true) {
@@ -135,7 +135,7 @@ public class Parser {
             try {
                 value = NumberFormat.getInstance().parse(scanner.nextLine());
             } catch (ParseException e) {
-                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, numType, Colors.AsciiReset);
+                System.err.printf("%sInput is not of type %s%s or wrong Date format%n", Colors.AsciiRed, numType, Colors.AsciiReset);
                 continue;
             }
 
@@ -154,15 +154,15 @@ public class Parser {
         }
     }
 
-    private static void readDate(String dateType, Field field, Builder object) {
-        System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), dateType);
+    private static void readDate(Field field, Builder object) {
+        System.out.printf("\u001B[35m%s (Date in format dd.MM.yyyy): %n\u001B[0m", StringUtils.capitalize(field.getName()));
         while (true) {
             System.out.print(">: ");
             Date value;
             try {
                 value = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
             } catch (ParseException e) {
-                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, dateType, Colors.AsciiReset);
+                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, "Date", Colors.AsciiReset);
                 continue;
             }
             if (value != null) {
@@ -201,11 +201,7 @@ public class Parser {
     }
 
     /**
-     * Checks if string is valid. If string is empty and field is annotated with {@link NonNull} then it will return false.
-     * <p>
-     * If string length is less than {@link Length#min()} then it will return false.
-     * <p>
-     * If string length is greater than {@link Length#max()} then it will return false.
+     * Checks if string is valid. If string is empty and field is annotated with {@link NotNull} then it will return false.
      * <p>
      * Otherwise, it will return true.
      *
@@ -214,20 +210,9 @@ public class Parser {
      * @return true if value is valid
      */
     private static boolean checkString(Field field, String value) {
-        if (field.isAnnotationPresent(NonNull.class) && value.isEmpty()) {
+        if (field.isAnnotationPresent(NotNull.class) && value.isEmpty()) {
             System.err.println("Field can't be null");
             return false;
-        }
-        if (field.isAnnotationPresent(Length.class)) {
-            Length lengthAnnotation = field.getAnnotation(Length.class);
-            if (value.length() < lengthAnnotation.min()) {
-                System.err.printf("\u001B[31mLength must be greater than %d\n\u001B[0m", lengthAnnotation.min() - 1);
-                return false;
-            }
-            if (value.length() > lengthAnnotation.max()) {
-                System.err.printf("\u001B[31mLength must be less than %d\n\u001B[0m", lengthAnnotation.max() + 1);
-                return false;
-            }
         }
         return true;
     }
@@ -246,6 +231,7 @@ public class Parser {
             case "Integer", "int" -> IdGenerator.generateIntId();
             case "Long", "long" -> IdGenerator.generateLongId();
             case "LocalDateTime" -> Time.getTime();
+            case "ZonedDateTime" -> Time.getZonedDateTime();
             default -> null;
         };
     }

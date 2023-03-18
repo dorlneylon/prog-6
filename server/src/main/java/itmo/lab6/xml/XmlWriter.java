@@ -3,7 +3,6 @@ package itmo.lab6.xml;
 
 import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.moviecollection.MovieCollection;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -94,7 +93,7 @@ public class XmlWriter extends XmlAction {
      *
      * @return Indent string
      */
-    private @NotNull String indentString() {
+    private String indentString() {
         return new String(new char[indentLevel * 4]).replace("\0", " ");
     }
 }

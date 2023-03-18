@@ -1,22 +1,15 @@
 package itmo.lab6.basic.types.builders;
 
 import itmo.lab6.basic.baseclasses.Coordinates;
-import itmo.lab6.basic.utils.annotations.*;
+import itmo.lab6.basic.types.builders.annotations.NotNull;
+import itmo.lab6.basic.types.builders.annotations.Value;
 
-import java.util.Date;
+public class CoordinatesBuilder implements Builder {
 
-/**
- * Builder for Product. Used for creating Product objects, while parsing XML.
- *
- * @see Builder
- */
-public final class CoordinatesBuilder implements Builder {
-    @Value
-    @NonNull
+    @Value(min = -521)
     private float x;
-
-    @Value
-    @NonNull
+    @Value(max = 256)
+    @NotNull
     private Integer y;
 
     @Override

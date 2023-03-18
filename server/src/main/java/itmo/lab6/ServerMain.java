@@ -13,12 +13,6 @@ public class ServerMain {
         MovieCollection collection = new Xml(new File("col.xml")).newReader().parse();
         System.out.println(Arrays.toString(collection.values()));
         UdpServer server = new UdpServer(collection, 5050);
-        try {
-            server.run();
-        } catch (Exception e) {
-            // kxr: Попадает ли он сюда вообще??
-            // nyl: Да, иногда попадает.
-            System.err.println(e.getMessage());
-        }
+        server.run();
     }
 }

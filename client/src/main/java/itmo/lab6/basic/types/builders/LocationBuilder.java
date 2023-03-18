@@ -1,19 +1,13 @@
 package itmo.lab6.basic.types.builders;
 
 import itmo.lab6.basic.baseclasses.Location;
-import itmo.lab6.basic.utils.annotations.*;
+import itmo.lab6.basic.types.builders.annotations.NotNull;
 
-public final class LocationBuilder implements Builder {
-    @Value
-    @NonNull
+public class LocationBuilder implements Builder {
+
     private long x;
-
-    @Value
-    @NonNull
+    @NotNull
     private Double y;
-
-    @Value
-    @NonNull
     private double z;
 
     @Override

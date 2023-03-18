@@ -1,9 +1,10 @@
 package itmo.lab6.commands.implemented;
 
+import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.commands.Action;
 import itmo.lab6.server.response.Response;
 import itmo.lab6.server.response.ResponseType;
-import itmo.lab6.basic.baseclasses.Movie;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 

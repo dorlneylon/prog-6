@@ -1,12 +1,11 @@
-package itmo.lab6.basic.utils.annotations;
-
+package itmo.lab6.basic.types.builders.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface NonNull {
+@Target(ElementType.FIELD)
+public @interface NotNull {
 }

@@ -6,7 +6,7 @@ import itmo.lab6.server.response.ResponseType;
 
 import static itmo.lab6.server.UdpServer.collection;
 
-public class ClearCommand implements Action {
+public final class ClearCommand implements Action {
     @Override
     public Response run() {
         collection.clear();

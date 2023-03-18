@@ -22,7 +22,7 @@ public class Coordinates implements Serializable {
 	 * @param y the y value of the coordinate
 	 */
 	public Coordinates(float x, Integer y) {
-		if (x < -520 || y > 256 || y == null) throw new IllegalArgumentException("Invalid coordinates");
+		if (x < -520 || y > 256) throw new IllegalArgumentException("Invalid coordinates");
 		this.x = x;
 		this.y = y;
 	}

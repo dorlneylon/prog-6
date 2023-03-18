@@ -75,7 +75,8 @@ public abstract class MHMap<K, V> {
         if (isContainsKey(key)) {
             this.map.remove(key);
             return true;
-        } else return false;
+        }
+        return false;
     }
 
     /**
@@ -95,7 +96,7 @@ public abstract class MHMap<K, V> {
     /**
      * remove the value from the map
      */
-    public void rmByVal(V val) {
+    public void removeByValue(V val) {
         this.removeByKey(this.getKey(val));
     }
 
@@ -116,12 +117,12 @@ public abstract class MHMap<K, V> {
     /**
      * sort the map elements by a comparator and print them
      */
-    public abstract void printAscending();
+    public abstract String printAscending();
 
     /**
      * reverse sort the map elements by a comparator and print them
      */
-    public abstract void printDescending();
+    public abstract String printDescending();
 
     /**
      * update the value by the key
@@ -192,7 +193,7 @@ public abstract class MHMap<K, V> {
      *
      * @return the sorted array of values
      */
-    public abstract V[] sorted(boolean reverse);
+    public abstract V[] getSortedMovies(boolean reverse);
 
     /**
      * get the map
@@ -213,7 +214,7 @@ public abstract class MHMap<K, V> {
     public String info() {
         Class<?> a = this.map.isEmpty() ? null : this.map.entrySet().stream().toList().get(0).getKey().getClass();
         String keyTypeName = a == null ? "none" : a.getName();
-        return  prcr + "Type: " + whcr + this.getClass().getName() + "\n" +
+        return prcr + "Type: " + whcr + this.getClass().getName() + "\n" +
                 prcr + "Key type: " + whcr + keyTypeName + "\n" +
                 prcr + "Date of initialization: " + whcr + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n" +
                 prcr + "Number of elements: " + whcr + this.size() + "\n";

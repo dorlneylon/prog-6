@@ -6,7 +6,6 @@ import itmo.lab6.basic.baseenums.MpaaRating;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -41,9 +40,11 @@ public class MovieCollection extends MHMap<Long, Movie> {
      *
      * @param key the key to compare with.
      */
-    public void removeGreater(Long key) {
-        for (Movie movie : this.values())
-            if (key.compareTo(movie.oscarsCount()) < 0) this.rmByVal(movie);
+    public boolean removeGreater(Long key) {
+        // Я надеюсь, что это работает :)
+        int oldLength = this.size();
+        Arrays.stream(this.values()).filter(movie -> this.get(key).compareTo(movie) < 0).forEach(this::removeByValue);
+        return oldLength != this.size();
     }
 
     public boolean equals(MovieCollection map) {
@@ -60,10 +61,9 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @see Movie
      */
     @Override
-    public void printAscending() {
-        Movie[] movies = sorted(false);
-        for (Movie movie : movies)
-            System.out.println(movie.toString());
+    public String printAscending() {
+        Movie[] movies = getSortedMovies(false);
+        return Arrays.stream(movies).map(Object::toString).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -72,10 +72,9 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @see Movie
      */
     @Override
-    public void printDescending() {
-        Movie[] movies = sorted(true);
-        for (Movie movie : movies)
-            System.out.println(movie.toString());
+    public String printDescending() {
+        Movie[] movies = getSortedMovies(true);
+        return Arrays.stream(movies).map(Object::toString).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -139,7 +138,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
     }
 
     @Override
-    public Movie[] sorted(boolean reverse) {
+    public Movie[] getSortedMovies(boolean reverse) {
         Movie[] movies = this.values();
         Arrays.sort(movies, (reverse) ? Comparator.reverseOrder() : Comparator.naturalOrder());
         return movies;
@@ -153,7 +152,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @see MpaaRating
      */
     public boolean removeByRating(MpaaRating rating) {
-        Arrays.stream(this.values()).filter(movie -> movie.getRating() == rating).forEach(this::rmByVal);
+        Arrays.stream(this.values()).filter(movie -> movie.getRating() == rating).forEach(this::removeByValue);
         return true;
     }
 

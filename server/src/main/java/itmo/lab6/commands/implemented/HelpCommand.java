@@ -1,11 +1,18 @@
 package itmo.lab6.commands.implemented;
 
 import itmo.lab6.commands.Action;
+import itmo.lab6.commands.CommandType;
 import itmo.lab6.server.response.Response;
+import itmo.lab6.server.response.ResponseType;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public final class HelpCommand implements Action {
     @Override
     public Response run() {
-        return null;
+        return new Response(Arrays.stream(CommandType.values()).
+                map(CommandType::getDescription).
+                collect(Collectors.joining("\n")), ResponseType.INFO);
     }
 }

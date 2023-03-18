@@ -1,8 +1,5 @@
 package itmo.lab6.utils.string;
 
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-
 /**
  * String utils class
  *
@@ -28,7 +25,7 @@ public final class StringUtils {
      * @param input string in camelCase
      * @return string in snake_case
      */
-    public static @NotNull String toSnakeCase(String input) {
+    public static String toSnakeCase(String input) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < input.length(); i++) {
             char c = input.charAt(i);
@@ -47,7 +44,7 @@ public final class StringUtils {
      * @param input string in snake_case
      * @return string in camelCase
      */
-    public static @NotNull String toCamelCase(String input) {
+    public static String toCamelCase(String input) {
         StringBuilder builder = new StringBuilder();
         boolean shouldCapitalizeNext = false;
         for (var c : input.toCharArray()) {

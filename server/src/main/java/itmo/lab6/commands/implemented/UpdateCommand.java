@@ -8,7 +8,7 @@ import itmo.lab6.server.response.ResponseType;
 import static itmo.lab6.server.UdpServer.collection;
 
 public class UpdateCommand implements Action {
-    private Movie movie;
+    private final Movie movie;
 
     public UpdateCommand(Movie movie) {
         this.movie = movie;
@@ -19,6 +19,6 @@ public class UpdateCommand implements Action {
         if (!collection.isKeyPresented(movie.getId())) return new Response("Collection does not contain such a key", ResponseType.SUCCESS);
         collection.update(movie);
 
-        return new Response("update was completed successfully", ResponseType.SUCCESS);
+        return new Response("Update was completed successfully", ResponseType.SUCCESS);
     }
 }

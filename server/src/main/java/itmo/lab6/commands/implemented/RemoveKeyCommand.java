@@ -6,9 +6,9 @@ import itmo.lab6.server.response.Response;
 import itmo.lab6.server.response.ResponseType;
 
 public final class RemoveKeyCommand implements Action {
-    private final long key;
+    private final Long key;
 
-    public RemoveKeyCommand(long key) {
+    public RemoveKeyCommand(Long key) {
         this.key = key;
     }
 

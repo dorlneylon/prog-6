@@ -32,7 +32,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @see Person
      */
     public String show() {
-        return Arrays.stream(this.values()).map(Movie::info).collect(Collectors.joining("\n"));
+        return Arrays.stream(this.values()).map(Movie::toString).collect(Collectors.joining("\n"));
     }
 
     /**
@@ -41,10 +41,10 @@ public class MovieCollection extends MHMap<Long, Movie> {
      * @param key the key to compare with.
      */
     public boolean removeGreater(Long key) {
-        // Я надеюсь, что это работает :)
-        int oldLength = this.size();
-        Arrays.stream(this.values()).filter(movie -> this.get(key).compareTo(movie) < 0).forEach(this::removeByValue);
-        return oldLength != this.size();
+        return Arrays.stream(this.values())
+                .filter(movie -> movie.getOscarsCount() > key)
+                .map(movie -> this.removeByKey(movie.getId()))
+                .reduce(false, (a, b) -> a || b);
     }
 
     public boolean equals(MovieCollection map) {

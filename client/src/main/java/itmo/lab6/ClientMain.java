@@ -6,7 +6,7 @@ import itmo.lab6.basic.utils.parser.Parser;
 import itmo.lab6.commands.Command;
 import itmo.lab6.commands.CommandType;
 import itmo.lab6.connection.Connector;
-
+import java.net.Socket;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 import java.util.Objects;
@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class ClientMain {
     public static void main(String[] args) throws Exception {
         Connector connector = new Connector(5050);
+        connector.setBufferSize(8192*8192);
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -24,10 +25,10 @@ public class ClientMain {
             ObjectOutputStream oos1 = new ObjectOutputStream(baos1);
             if (command.split(" ").length > 1) {
                 switch (command.split(" ")[0]) {
-                    case "insert" ->
-                            oos1.writeObject(new Command(cast(command), setId(Objects.requireNonNull(Parser.readObject(Movie.class)), Long.parseLong(command.split(" ")[1]))));
+                    case "insert" -> oos1.writeObject(new Command(cast(command), setId(Objects.requireNonNull(Parser.readObject(Movie.class)), Long.parseLong(command.split(" ")[1]))));
                     case "update" -> update(command, oos1, connector);
-                    default -> oos1.writeObject(new Command(cast(command)));
+                    case "remove_key" -> oos1.writeObject(new Command(cast(command), Long.parseLong(command.split(" ")[1])));
+                    case "remove_greater" -> oos1.writeObject(new Command(cast(command), Long.parseLong(command.split(" ")[1])));
                 }
             } else oos1.writeObject(new Command(cast(command)));
             oos1.flush();

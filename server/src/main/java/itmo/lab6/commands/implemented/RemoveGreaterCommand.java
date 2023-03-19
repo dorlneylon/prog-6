@@ -7,9 +7,9 @@ import itmo.lab6.server.response.ResponseType;
 
 public final class RemoveGreaterCommand implements Action {
 
-    private final long key;
+    private final Long key;
 
-    public RemoveGreaterCommand(long key) {
+    public RemoveGreaterCommand(Long key) {
         this.key = key;
     }
 

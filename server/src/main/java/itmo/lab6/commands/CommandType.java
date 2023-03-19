@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 public enum CommandType implements Serializable {
     CLEAR(ClearCommand.class, "clear: clear the collection"),
-    DEFAULT(DefaultCommand.class, ""),
     EXECUTE_SCRIPT(ExecuteScriptCommand.class, "execute_script <file_name>: read and execute the script from the specified file. The script contains commands in the same form in which they are entered by the user in interactive mode. USE RELATIVE PATHS."),
     EXIT(ExitCommand.class, "show: output to the standard output stream all elements of the collection in the string representation"),
     HELP(HelpCommand.class, "help: shows this message"),
@@ -21,6 +20,7 @@ public enum CommandType implements Serializable {
     REMOVE_KEY(RemoveKeyCommand.class, "remove_key <id>: delete an element from the collection by its key"),
     SHOW(ShowCommand.class, "show: output to the standard output stream all elements of the collection in the string representation"),
     UPDATE(UpdateCommand.class, "update <id> {element}: update the value of a collection element whose id is equal to the specified"),
+    DEFAULT(DefaultCommand.class, ""),
     SERVICE(ServiceCommand.class, "");
     private final Class<? extends Action> executableClass;
     private final String description;

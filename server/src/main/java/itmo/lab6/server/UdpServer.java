@@ -11,7 +11,7 @@ import java.nio.channels.DatagramChannel;
 import static itmo.lab6.commands.CommandHandler.handlePacket;
 
 public class UdpServer {
-    private static final int BUFFER_SIZE = 4096;
+    private static final int BUFFER_SIZE = 8192*8192;
     public static MovieCollection collection;
     private final int port;
     // public static InetSocketAddress clientAddress;

@@ -13,6 +13,7 @@ import java.time.ZonedDateTime;
 
 public class MovieBuilder implements Builder {
     @NotNull
+    @Generated
     @Value(min = 0)
     private Long id;
     @NotNull

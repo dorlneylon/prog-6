@@ -200,7 +200,7 @@ public class Person implements Serializable {
 		this.location = location;
 	}
 
-	public String info() {
+	public String toString() {
 		String birthday = new java.text.SimpleDateFormat("dd.MM.yyyy").format(this.birthday);
 		return prcr + "Director's name: " + whcr + name
 			 + prcr + ",\nDirector's location: " + whcr + location

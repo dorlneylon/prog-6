@@ -14,6 +14,6 @@ public class ShowCommand implements Action {
 
     @Override
     public Response run() {
-        return new Response(Arrays.stream(collection.values()).map(Movie::info).collect(Collectors.joining("\n")), ResponseType.INFO);
+        return new Response(Arrays.stream(collection.values()).map(Movie::toString).collect(Collectors.joining("\n")), ResponseType.INFO);
     }
 }

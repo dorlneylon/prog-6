@@ -359,6 +359,6 @@ public class Movie implements Comparable<Movie>, Serializable {
 			+ prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n"
 			+ prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n"
 			+ prcr + "Genre: " + whcr + genre + ",\n"
-			+ prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.info();
+			+ prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
 	}
 }

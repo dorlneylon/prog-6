@@ -199,8 +199,8 @@ public class Person implements Serializable {
         return this.name.equals(p.name) && this.height == p.getHeight() && this.hairColor.equals(p.getHairColor()) && this.location.equals(p.getLocation());
     }
 
-
-    public String info() {
+    @Override
+    public String toString() {
         String birthday = new java.text.SimpleDateFormat("dd.MM.yyyy").format(this.birthday);
         return prcr + "Director's name: " + whcr + name + prcr + ",\nDirector's location: " + whcr + location + prcr + ",\nDirector's height: " + whcr + height + prcr + ",\nDirector's hair color: " + whcr + hairColor + prcr + ",\nDirector's birth date: " + whcr + birthday;
     }

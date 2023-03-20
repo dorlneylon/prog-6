@@ -28,7 +28,7 @@ public final class Command implements Serializable {
     /**
      * В этом методе вызывается конструктор у нужной нам команды. Затем она исполняется.
      */
-    public final Response execute() {
+    public Response execute() {
         try {
             Class<?> executableClass = commandType.getExecutableClass();
             Constructor<?> constructor;

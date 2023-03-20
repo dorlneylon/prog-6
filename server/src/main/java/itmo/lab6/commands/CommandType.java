@@ -7,7 +7,7 @@ import java.io.Serializable;
 public enum CommandType implements Serializable {
     CLEAR(ClearCommand.class, "clear: clear the collection"),
     EXECUTE_SCRIPT(ExecuteScriptCommand.class, "execute_script <file_name>: read and execute the script from the specified file. The script contains commands in the same form in which they are entered by the user in interactive mode. USE RELATIVE PATHS."),
-    EXIT(ExitCommand.class, "show: output to the standard output stream all elements of the collection in the string representation"),
+    EXIT(null, "exit: exit the program"),
     HELP(HelpCommand.class, "help: shows this message"),
     HISTORY(HistoryCommand.class, "history: output the last 7 commands (without their arguments)"),
     INFO(InfoCommand.class, "info: output to the standard output stream information about the collection (type initialization date number of elements etc.)"),

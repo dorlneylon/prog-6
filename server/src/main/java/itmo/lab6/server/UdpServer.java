@@ -56,6 +56,7 @@ public class UdpServer {
                             try {
                                 handlePacket(clientAddress, data);
                             } catch (Exception e) {
+                                // Думаю, нам стоит убрать этот send.
                                 keyChannel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
                                 ServerLogger.getLogger().warning(e.getMessage());
                             }

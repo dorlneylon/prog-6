@@ -13,6 +13,7 @@ public final class HelpCommand implements Action {
     public Response run() {
         return new Response(Arrays.stream(CommandType.values()).
                 map(CommandType::getDescription).
+                filter(description -> !description.isEmpty()).
                 collect(Collectors.joining("\n")), ResponseType.INFO);
     }
 }

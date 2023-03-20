@@ -42,7 +42,7 @@ public class MovieCollection extends MHMap<Long, Movie> {
      */
     public boolean removeGreater(Long key) {
         return Arrays.stream(this.values())
-                .filter(movie -> movie.getOscarsCount() > key)
+                .filter(movie -> movie.getOscarsInt() > key)
                 .map(movie -> this.removeByKey(movie.getId()))
                 .reduce(false, (a, b) -> a || b);
     }

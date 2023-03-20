@@ -17,6 +17,6 @@ public final class InsertCommand implements Action {
     @Override
     public Response run() {
         collection.insert(movie);
-        return new Response("insert was completed successfully", ResponseType.SUCCESS);
+        return new Response("Insert was completed successfully", ResponseType.SUCCESS);
     }
 }

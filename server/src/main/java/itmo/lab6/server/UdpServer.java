@@ -1,20 +1,24 @@
 package itmo.lab6.server;
 
 import itmo.lab6.basic.moviecollection.MovieCollection;
-import itmo.lab6.commands.CommandHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.util.Iterator;
 
 import static itmo.lab6.commands.CommandHandler.handlePacket;
+import static itmo.lab6.commands.CommandHandler.setChannel;
 
 public class UdpServer {
-    private static final int BUFFER_SIZE = 8192*8192;
+    private static final int BUFFER_SIZE = 8192 * 8192;
     public static MovieCollection collection;
     private final int port;
-    // public static InetSocketAddress clientAddress;
+    private DatagramChannel datagramChannel;
+    private Selector selector;
 
     public UdpServer(MovieCollection collection, int port) {
         this.port = port;
@@ -22,29 +26,52 @@ public class UdpServer {
     }
 
     public void run() {
-        try (DatagramChannel channel = DatagramChannel.open()) {
-            CommandHandler.setChannel(channel);
-            channel.configureBlocking(false);
+        ExitThread exitThread = new ExitThread();
+        exitThread.start();
+        try {
+            datagramChannel = DatagramChannel.open();
+            datagramChannel.configureBlocking(false);
+            datagramChannel.socket().bind(new InetSocketAddress(port));
+            selector = Selector.open();
+            datagramChannel.register(selector, SelectionKey.OP_READ);
             ServerLogger.getLogger().info("Starting server on port " + port);
-            channel.socket().bind(new InetSocketAddress(port));
-            ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
             while (true) {
-                buffer.clear();
-                InetSocketAddress clientAddress = (InetSocketAddress) channel.receive(buffer);
-                if (clientAddress != null) {
-                    buffer.flip();
-                    byte[] data = new byte[buffer.limit()];
-                    buffer.get(data);
-                    try {
-                        handlePacket(clientAddress, data);
-                    } catch (Exception e) {
-                        channel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
-                        ServerLogger.getLogger().warning(e.getMessage());
+                selector.select();
+                Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
+                while (keys.hasNext()) {
+                    SelectionKey key = keys.next();
+                    keys.remove();
+                    if (!key.isValid()) {
+                        continue;
+                    }
+                    if (key.isReadable()) {
+                        DatagramChannel keyChannel = (DatagramChannel) key.channel();
+                        setChannel(keyChannel);
+                        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
+                        InetSocketAddress clientAddress = (InetSocketAddress) keyChannel.receive(buffer);
+                        if (clientAddress != null) {
+                            buffer.flip();
+                            byte[] data = new byte[buffer.limit()];
+                            buffer.get(data);
+                            try {
+                                handlePacket(clientAddress, data);
+                            } catch (Exception e) {
+                                keyChannel.send(ByteBuffer.wrap(e.getMessage().getBytes()), clientAddress);
+                                ServerLogger.getLogger().warning(e.getMessage());
+                            }
+                        }
                     }
                 }
             }
         } catch (IOException e) {
             ServerLogger.getLogger().warning("Exception: " + e.getMessage());
+        } finally {
+            try {
+                selector.close();
+                datagramChannel.close();
+            } catch (IOException e) {
+                ServerLogger.getLogger().warning("Exception while closing channel or selector: " + e.getMessage());
+            }
         }
     }
 }

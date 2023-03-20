@@ -3,7 +3,7 @@ package itmo.lab6.commands.implemented;
 import itmo.lab6.commands.Executable;
 import itmo.lab6.connection.Response;
 
-public class RemoveLowerCommand implements Executable {
+public class ReplaceLowerCommand implements Executable {
     @Override
     public Response execute() {
 

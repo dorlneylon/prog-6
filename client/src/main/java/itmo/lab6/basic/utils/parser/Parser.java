@@ -3,12 +3,12 @@ package itmo.lab6.basic.utils.parser;
 import itmo.lab6.basic.Constants;
 import itmo.lab6.basic.types.builders.Builder;
 import itmo.lab6.basic.types.builders.annotations.Generated;
+import itmo.lab6.basic.types.builders.annotations.NotNull;
 import itmo.lab6.basic.types.builders.annotations.Value;
 import itmo.lab6.basic.utils.generators.IdGenerator;
 import itmo.lab6.basic.utils.generators.Time;
 import itmo.lab6.basic.utils.strings.StringUtils;
 import itmo.lab6.basic.utils.terminal.Colors;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
@@ -100,7 +100,6 @@ public class Parser {
                         try {
                             value = scanner.nextLine();
                         } catch (NoSuchElementException e) {
-                            System.exit(0);
                             return null;
                         }
                         if (checkString(field, value)) {
@@ -135,7 +134,7 @@ public class Parser {
             try {
                 value = NumberFormat.getInstance().parse(scanner.nextLine());
             } catch (ParseException e) {
-                System.err.printf("%sInput is not of type %s%s or wrong Date format%n", Colors.AsciiRed, numType, Colors.AsciiReset);
+                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, numType, Colors.AsciiReset);
                 continue;
             }
 
@@ -262,7 +261,7 @@ public class Parser {
      * @see Enum
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
-    private static @NotNull Enum<?> stringToEnum(Field field, String value) {
+    private static Enum<?> stringToEnum(Field field, String value) {
         return (Enum<?>) Enum.valueOf((Class<Enum>) field.getType(), value);
     }
 }

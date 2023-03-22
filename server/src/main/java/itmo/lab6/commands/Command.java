@@ -14,7 +14,7 @@ public final class Command implements Serializable {
     @Serial
     private static final long serialVersionUID = 6529685098267757690L;
     private final CommandType commandType;
-    private final Object[] arguments;
+    private Object[] arguments;
 
     public Command(CommandType commandType, Object... arguments) {
         this.commandType = commandType;
@@ -23,6 +23,10 @@ public final class Command implements Serializable {
 
     public CommandType getCommandType() {
         return commandType;
+    }
+
+    public void setArguments(Object... arguments) {
+        this.arguments = arguments;
     }
 
     /**
@@ -53,15 +57,4 @@ public final class Command implements Serializable {
             return new Response("Unable to execute command: " + e, ResponseType.ERROR);
         }
     }
-
-//    public final Response execute() {
-//        Response response;
-//        try {
-//            return commandType.getExecutableClass().getDeclaredConstructor().newInstance(arguments).run();
-//        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-//                 NoSuchMethodException e) {
-//            ServerLogger.getLogger().warning("Unable to execute command: " + e);
-//            return new Response("Unable to execute command: " + e, ResponseType.ERROR);
-//        }
-//    }
 }

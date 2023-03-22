@@ -1,6 +1,7 @@
 package itmo.lab6.server;
 
 import itmo.lab6.basic.moviecollection.MovieCollection;
+import itmo.lab6.utils.SizedStack;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -8,6 +9,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import static itmo.lab6.commands.CommandHandler.handlePacket;
@@ -16,6 +18,7 @@ import static itmo.lab6.commands.CommandHandler.setChannel;
 public class UdpServer {
     private static final int BUFFER_SIZE = 8192 * 8192;
     public static MovieCollection collection;
+    public static HashMap<InetSocketAddress, SizedStack<String>> commandHistory = new HashMap<>();
     private final int port;
     private DatagramChannel datagramChannel;
     private Selector selector;
@@ -49,6 +52,7 @@ public class UdpServer {
                         setChannel(keyChannel);
                         ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
                         InetSocketAddress clientAddress = (InetSocketAddress) keyChannel.receive(buffer);
+                        if (!commandHistory.containsKey(clientAddress)) commandHistory.put(clientAddress, new SizedStack<>(7));
                         if (clientAddress != null) {
                             buffer.flip();
                             byte[] data = new byte[buffer.limit()];

@@ -6,6 +6,8 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 
+import static itmo.lab6.server.UdpServer.commandHistory;
+
 public class CommandHandler {
     private static DatagramChannel channel;
 
@@ -20,6 +22,10 @@ public class CommandHandler {
     public static void handlePacket(InetSocketAddress sender, byte[] bytes) throws Exception {
         ObjectInputStream objectInputStream2 = new ObjectInputStream(new ByteArrayInputStream(bytes));
         Command command = (Command) objectInputStream2.readObject();
+        // TODO: избавиться от if'а
+        if (command.getCommandType() == CommandType.HISTORY) command.setArguments(sender);
         channel.send(ByteBuffer.wrap(command.execute().getMessage().getBytes()), sender);
+
+        commandHistory.get(sender).push(command.getCommandType().toString());
     }
 }

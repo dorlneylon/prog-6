@@ -1,5 +1,6 @@
 package itmo.lab6.basic.utils.files;
 
+import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.commands.Command;
 import itmo.lab6.commands.CommandFactory;
 import itmo.lab6.commands.CommandType;
@@ -9,10 +10,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
+import static itmo.lab6.commands.CommandFactory.parseMovie;
 
 public class ScriptExecutor {
     private final ArrayList<Command> commandQue = new ArrayList<>();
@@ -28,6 +28,8 @@ public class ScriptExecutor {
     }
 
     private ScriptExecutor readScript(File scriptFile) {
+        // создадим каунтер для пропуска лишних строк
+        int skipLines = 0;
         List<String> lines;
         try {
             lines = Files.readAllLines(scriptFile.toPath(), StandardCharsets.UTF_8);
@@ -36,6 +38,10 @@ public class ScriptExecutor {
         }
         filesMemory.add(scriptFile);
         for (String line : lines) {
+            if (skipLines > 0) {
+                skipLines--;
+                continue;
+            }
             String[] args = {};
             String[] lineSplit = line.split(" ");
             if (lineSplit.length > 1) {
@@ -52,6 +58,18 @@ public class ScriptExecutor {
                     continue;
                 }
             }
+            if (List.of(CommandType.INSERT, CommandType.UPDATE, CommandType.REPLACE_IF_LOWER).contains(commandType)) {
+                if (args.length < 1) {
+                    System.err.println("Not enough arguments for command " + commandType);
+                    continue;
+                }
+                String[] movieArgs = lines.subList(lines.indexOf(line) + 1, lines.indexOf(line) + 14).toArray(new String[0]);
+                skipLines = 13;
+                args = new String[movieArgs.length + 1];
+                args[0] = lineSplit[1];
+                System.arraycopy(movieArgs, 0, args, 1, movieArgs.length);
+            }
+
             Command cmd = CommandFactory.createCommand(commandType, args);
             if (cmd != null) commandQue.add(cmd);
         }

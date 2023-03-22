@@ -21,7 +21,27 @@ public final class CollectionValidator {
      */
     public static Boolean checkIfExists(CommandType command, Long key) throws Exception {
         connector.send(CommandSerializer.serialize(new Command(CommandType.SERVICE, "check_id %d".formatted(key))));
-        return (command.equals(CommandType.INSERT) && !Boolean.parseBoolean(connector.receive())) || ((command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) && Boolean.parseBoolean(connector.receive()));
+        return (command.equals(CommandType.INSERT) && Boolean.FALSE.equals(Boolean.parseBoolean(connector.receive()))) || ((command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) && Boolean.TRUE.equals(Boolean.parseBoolean(connector.receive())));
+    }
+
+    public static Boolean isMovieValid(CommandType type, String[] args) {
+        if (args.length < 1) {
+            System.err.println("Not enough arguments for command " + type.name());
+            return null;
+        }
+        Long key;
+        try {
+            key = Long.parseLong(args[0]);
+            if (!checkIfExists(type, key)) {
+                System.err.println("Key " + key + " is not compatible with the command " + type.name() + ".");
+                return false;
+            }
+        } catch (Exception e) {
+            System.err.println("Invalid argument for command " + type.name());
+            return false;
+        }
+
+        return true;
     }
 }
 

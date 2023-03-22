@@ -11,6 +11,8 @@ import itmo.lab6.basic.utils.strings.StringUtils;
 import itmo.lab6.basic.utils.terminal.Colors;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
@@ -19,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Parser {
-    private static final Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
     /**
      * This method reads object of type T from console.
@@ -263,5 +265,15 @@ public class Parser {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static Enum<?> stringToEnum(Field field, String value) {
         return (Enum<?>) Enum.valueOf((Class<Enum>) field.getType(), value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> @Nullable T readObject(Class<T> objectType, String[] movieArgs) {
+        InputStream inputStream = new ByteArrayInputStream(String.join("\n", movieArgs).getBytes());
+        Scanner oldsc = scanner;
+        scanner = new Scanner(inputStream);
+        T m = readObject(objectType);
+        scanner = oldsc;
+        return m;
     }
 }

@@ -5,11 +5,14 @@ import itmo.lab6.basic.utils.files.FileUtils;
 import itmo.lab6.basic.utils.files.ScriptExecutor;
 import itmo.lab6.basic.utils.parser.Parser;
 
+import java.util.Arrays;
+import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import static itmo.lab6.commands.CollectionValidator.checkIfExists;
+import static itmo.lab6.commands.CollectionValidator.isMovieValid;
 
 /**
  * This class is used to create new instances of {@link Command}
@@ -56,28 +59,35 @@ public final class CommandFactory {
                 }
             }
             case INSERT, UPDATE, REPLACE_IF_LOWER -> {
-                if (args.length < 1) {
-                    System.err.println("Not enough arguments for command " + type.name());
-                    yield null;
+                Movie movie;
+                if (args.length == 1) {
+                    movie = parseMovie(type, args);
                 }
-                Long key;
-                try {
-                    key = Long.parseLong(args[0]);
-                    if (!checkIfExists(type, key)) {
-                        System.err.println("Key " + key + " is not compatible with the command " + type.name() + ".");
-                        yield null;
-                    }
-                } catch (Exception e) {
-                    System.err.println("Invalid argument for command " + type.name());
-                    yield null;
+                else {
+                    movie = parseMovie(type, new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
                 }
-
-                Movie movie = Parser.readObject(Movie.class);
-                Objects.requireNonNull(movie).setId(key);
-                yield new Command(type, movie);
+                // TODO: скорее всего, проверка не нужна.
+                if (movie != null) yield new Command(type, movie);
+                yield null;
             }
             // DEFAULT command
             default -> null;
         };
+    }
+
+    public static Movie parseMovie(CommandType type, String[] args) {
+        if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
+
+        Movie movie = Parser.readObject(Movie.class);
+        Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
+        return movie;
+    }
+
+    public static Movie parseMovie(CommandType type, String[] args, String[] movieArgs) {
+        if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
+
+        Movie movie = Parser.readObject(Movie.class, movieArgs);
+        Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
+        return movie;
     }
 }

@@ -217,6 +217,6 @@ public abstract class MHMap<K, V> {
         return prcr + "Type: " + whcr + this.getClass().getName() + "\n" +
                 prcr + "Key type: " + whcr + keyTypeName + "\n" +
                 prcr + "Date of initialization: " + whcr + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n" +
-                prcr + "Number of elements: " + whcr + this.size() + "\n";
+                prcr + "Number of elements: " + whcr + this.size();
     }
 }

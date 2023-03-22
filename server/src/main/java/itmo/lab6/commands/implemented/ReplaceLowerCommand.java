@@ -8,7 +8,7 @@ import itmo.lab6.server.response.ResponseType;
 import static itmo.lab6.server.UdpServer.collection;
 
 public final class ReplaceLowerCommand implements Action {
-    private Movie movie;
+    private final Movie movie;
 
     public ReplaceLowerCommand(Movie movie) {
         this.movie = movie;

@@ -27,5 +27,7 @@ public class CommandHandler {
         channel.send(ByteBuffer.wrap(command.execute().getMessage().getBytes()), sender);
 
         commandHistory.get(sender).push(command.getCommandType().toString());
+
+        // todo: сохранение после каждого действия.
     }
 }

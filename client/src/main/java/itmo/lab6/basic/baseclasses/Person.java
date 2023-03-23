@@ -206,6 +206,6 @@ public class Person implements Serializable {
 			 + prcr + ",\nDirector's location: " + whcr + location
 			 + prcr + ",\nDirector's height: " + whcr + height
 			 + prcr + ",\nDirector's hair color: " + whcr + hairColor
-			 + prcr + ",\nDirector's birth date: " + whcr + birthday;
+			 + prcr + ",\nDirector's birth date: " + whcr + birthday + "\n";
 	}
 }

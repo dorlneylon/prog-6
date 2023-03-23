@@ -1,26 +1,94 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<MoviesCollection>
+<MovieCollection>
     <Movie>
         <id>1</id>
-        <name>The Shawshank Redemption</name>
-        <coordinates>
-            <x>23.3</x>
-            <y>256</y>
-        </coordinates>
-        <creation_date>2020-12-01T08:00:00Z</creation_date>
-        <oscars_count>4</oscars_count>
-        <genre>TRAGEDY</genre>
+        <name>asdf</name>
+        <Coordinates>
+            <x>1.0</x>
+            <y>2</y>
+        </Coordinates>
+        <creation_date>2023-03-23T18:33:26.148117+03:00[Europe/Moscow]</creation_date>
+        <oscars_count>234</oscars_count>
+        <genre>COMEDY</genre>
         <mpaa_rating>R</mpaa_rating>
-        <director>
-            <name>Frank Darabont</name>
-            <birthday>28.12.1212</birthday>
-            <height>183</height>
-            <hair_color>BLACK</hair_color>
-            <location>
-                <x>34</x>
-                <y>67.8</y>
-                <z>23.1</z>
-            </location>
-        </director>
+        <Director>
+            <name>adsf</name>
+            <birthday>12.10.2223</birthday>
+            <height>234</height>
+            <hair_color>RED</hair_color>
+            <Location>
+                <x>1</x>
+                <y>2.0</y>
+                <z>3.0</z>
+            </Location>
+        </Director>
     </Movie>
-</MoviesCollection>
+    <Movie>
+        <id>20</id>
+        <name>adsf</name>
+        <Coordinates>
+            <x>1.0</x>
+            <y>2</y>
+        </Coordinates>
+        <creation_date>2023-03-23T18:35:14.443928+03:00[Europe/Moscow]</creation_date>
+        <oscars_count>3</oscars_count>
+        <genre>ACTION</genre>
+        <mpaa_rating>R</mpaa_rating>
+        <Director>
+            <name>adf</name>
+            <birthday>01.05.1978</birthday>
+            <height>435</height>
+            <hair_color>GREEN</hair_color>
+            <Location>
+                <x>5</x>
+                <y>3.0</y>
+                <z>1.0</z>
+            </Location>
+        </Director>
+    </Movie>
+    <Movie>
+        <id>5</id>
+        <name>fd</name>
+        <Coordinates>
+            <x>100.0</x>
+            <y>200</y>
+        </Coordinates>
+        <creation_date>2023-03-23T18:32:52.314137+03:00[Europe/Moscow]</creation_date>
+        <oscars_count>300</oscars_count>
+        <genre>COMEDY</genre>
+        <mpaa_rating>PG</mpaa_rating>
+        <Director>
+            <name>фвыа</name>
+            <birthday>22.10.2223</birthday>
+            <height>1488</height>
+            <hair_color>BLACK</hair_color>
+            <Location>
+                <x>3</x>
+                <y>2.0</y>
+                <z>1.0</z>
+            </Location>
+        </Director>
+    </Movie>
+    <Movie>
+        <id>10</id>
+        <name>asdf</name>
+        <Coordinates>
+            <x>11.0</x>
+            <y>23</y>
+        </Coordinates>
+        <creation_date>2023-03-23T18:34:18.272542+03:00[Europe/Moscow]</creation_date>
+        <oscars_count>123</oscars_count>
+        <genre>THRILLER</genre>
+        <mpaa_rating>NC_17</mpaa_rating>
+        <Director>
+            <name>adsf</name>
+            <birthday>24.08.5559</birthday>
+            <height>999</height>
+            <hair_color>BLUE</hair_color>
+            <Location>
+                <x>666</x>
+                <y>666.0</y>
+                <z>666.0</z>
+            </Location>
+        </Director>
+    </Movie>
+</MovieCollection>

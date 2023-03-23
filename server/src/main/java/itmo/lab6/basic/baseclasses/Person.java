@@ -1,6 +1,7 @@
 package itmo.lab6.basic.baseclasses;
 
 import itmo.lab6.basic.auxiliary.Randomness;
+import itmo.lab6.basic.baseclasses.builders.annotations.Generated;
 import itmo.lab6.basic.baseenums.Color;
 
 import java.io.Serial;
@@ -19,21 +20,8 @@ import java.util.Date;
  */
 public class Person implements Serializable {
     @Serial
+    @Generated
     private static final long serialVersionUID = 6529685098267757690L;
-    /**
-     * A constant to represent the white color code in ANSI escape codes.
-     */
-    public static final String whcr = "\u001B[0m";
-
-    /**
-     * The ANSI color for blue.
-     */
-    public static final String blcr = "\u001B[34m";
-
-    /**
-     * A constant to represent the purple color code in ANSI escape codes.
-     */
-    public static final String prcr = "\u001B[35m";
 
     /**
      * The name of the person.

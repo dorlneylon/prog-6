@@ -5,8 +5,10 @@ import java.io.ObjectInputStream;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
-
+import itmo.lab6.xml.Xml;
+import java.io.File;
 import static itmo.lab6.server.UdpServer.commandHistory;
+import static itmo.lab6.server.UdpServer.collection;
 
 public class CommandHandler {
     private static DatagramChannel channel;
@@ -28,6 +30,6 @@ public class CommandHandler {
 
         commandHistory.get(sender).push(command.getCommandType().toString());
 
-        // todo: сохранение после каждого действия.
+		new Xml(new File("col.xml")).newWriter().writeCollection(collection);
     }
 }

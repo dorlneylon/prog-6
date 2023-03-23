@@ -1,5 +1,6 @@
 package itmo.lab6.basic.baseclasses;
 
+import itmo.lab6.basic.baseclasses.builders.annotations.Generated;
 import itmo.lab6.basic.baseenums.MovieGenre;
 import itmo.lab6.basic.baseenums.MpaaRating;
 
@@ -17,24 +18,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Movie implements Comparable<Movie>, Serializable {
     @Serial
+    @Generated
     private static final long serialVersionUID = 6529685098267757690L;
-    /**
-     * Reset the ANSI color.
-     */
-    public static final String whcr = "\u001B[0m";
 
-    /**
-     * The ANSI color for blue.
-     */
-    public static final String blcr = "\u001B[34m";
-
-    /**
-     * the ANSI color for purple.
-     */
-    public static final String prcr = "\u001B[35m";
-    /**
-     * The next unique ID to be assigned to a movie instance.
-     */
+    @Generated
     private static Long nextId = 1L;
 
     /**

@@ -1,5 +1,7 @@
 package itmo.lab6.basic.moviecollection;
 
+import itmo.lab6.server.ServerLogger;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -130,7 +132,7 @@ public abstract class MHMap<K, V> {
     public void update(K key, V value) {
         if (isKeyPresented(key)) {
             this.map.put(key, value);
-            System.out.println("Done!");
+            ServerLogger.getLogger().info("Element with key " + key + " was successfully updated");
         } else System.out.println("No such value");
     }
 
@@ -214,9 +216,9 @@ public abstract class MHMap<K, V> {
     public String info() {
         Class<?> a = this.map.isEmpty() ? null : this.map.entrySet().stream().toList().get(0).getKey().getClass();
         String keyTypeName = a == null ? "none" : a.getName();
-        return prcr + "Type: " + whcr + this.getClass().getName() + "\n" +
-                prcr + "Key type: " + whcr + keyTypeName + "\n" +
-                prcr + "Date of initialization: " + whcr + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n" +
-                prcr + "Number of elements: " + whcr + this.size();
+        return "Type: " + this.getClass().getName() + "\n"
+                + "Key type: " + keyTypeName + "\n"
+                + "Date of initialization: " + this.getInitDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n"
+                + "Number of elements: " + this.size();
     }
 }

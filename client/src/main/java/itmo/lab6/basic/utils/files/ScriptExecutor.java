@@ -1,6 +1,5 @@
 package itmo.lab6.basic.utils.files;
 
-import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.commands.Command;
 import itmo.lab6.commands.CommandFactory;
 import itmo.lab6.commands.CommandType;
@@ -11,8 +10,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
-
-import static itmo.lab6.commands.CommandFactory.parseMovie;
 
 public class ScriptExecutor {
     private final ArrayList<Command> commandQue = new ArrayList<>();
@@ -38,15 +35,14 @@ public class ScriptExecutor {
         }
         filesMemory.add(scriptFile);
         for (String line : lines) {
-            if (skipLines > 0) {
-                skipLines--;
-                continue;
-            }
+            if (skipLines-- > 0) continue;
+
             String[] args = {};
             String[] lineSplit = line.split(" ");
             if (lineSplit.length > 1) {
                 args = Arrays.copyOfRange(lineSplit, 1, lineSplit.length);
             }
+
             CommandType commandType = CommandUtils.getCommandType(lineSplit[0]);
             if (commandType == CommandType.EXECUTE_SCRIPT) {
                 if (filesMemory.contains(new File(args[0]))) {
@@ -58,7 +54,7 @@ public class ScriptExecutor {
                     continue;
                 }
             }
-            if (List.of(CommandType.INSERT, CommandType.UPDATE, CommandType.REPLACE_IF_LOWER).contains(commandType)) {
+            if (Set.of(CommandType.INSERT, CommandType.UPDATE, CommandType.REPLACE_IF_LOWER).contains(commandType)) {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + commandType);
                     continue;

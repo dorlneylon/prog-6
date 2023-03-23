@@ -43,7 +43,7 @@ public class Parser {
         try {
             builderClass = Class.forName("%s.%sBuilder".formatted(Constants.BuildersPath, objectType.getSimpleName()));
         } catch (ClassNotFoundException e) {
-            System.err.println("Can't find builder for class: " + objectType.getSimpleName());
+            if (!flag) System.err.println("Can't find builder for class: " + objectType.getSimpleName());
             return null;
         }
         // Creating builder object.
@@ -52,10 +52,10 @@ public class Parser {
             object = (Builder) builderClass.getDeclaredConstructor().newInstance();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                  NoSuchMethodException e) {
-            System.err.println("Can't create builder");
+            if (!flag) System.err.println("Can't create builder");
             return null;
         }
-        System.out.printf("%s%s%s%n", Colors.AsciiRed, objectType.getSimpleName(), Colors.AsciiReset);
+        if (!flag) System.out.printf("%s%s%s%n", Colors.AsciiRed, objectType.getSimpleName(), Colors.AsciiReset);
         for (Field field : builderClass.getDeclaredFields()) {
             field.setAccessible(true);
             // If field is Enum then converting string value to Enum<?> value.
@@ -63,7 +63,7 @@ public class Parser {
                 if (!flag) System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), field.getType().getSimpleName());
                 if (!flag) System.out.printf("\u001B[35mEnum constants: %s\u001B[0m %n", Arrays.toString(field.getType().getEnumConstants()));
                 while (true) {
-                    System.out.print(">: ");
+                    if (!flag) System.out.print(">: ");
                     String value;
                     try {
                         value = scanner.nextLine();
@@ -98,7 +98,7 @@ public class Parser {
                 case "String" -> {
                     if (!flag) System.out.printf("\u001B[35m%s (String): %n\u001B[0m", StringUtils.capitalize(field.getName()));
                     while (true) {
-                        System.out.print(">: ");
+                        if (!flag) System.out.print(">: ");
                         String value;
                         try {
                             value = scanner.nextLine();
@@ -268,7 +268,6 @@ public class Parser {
         return (Enum<?>) Enum.valueOf((Class<Enum>) field.getType(), value);
     }
 
-    @SuppressWarnings("unchecked")
     public static <T> @Nullable T readObject(Class<T> objectType, String[] movieArgs) {
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", movieArgs).getBytes());
         Scanner oldsc = scanner;

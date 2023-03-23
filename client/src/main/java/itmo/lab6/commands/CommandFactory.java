@@ -7,13 +7,11 @@ import itmo.lab6.basic.utils.files.FileUtils;
 import itmo.lab6.basic.utils.files.ScriptExecutor;
 import itmo.lab6.basic.utils.parser.Parser;
 
-import java.util.Arrays;
-import java.util.Scanner;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
-import static itmo.lab6.commands.CollectionValidator.checkIfExists;
 import static itmo.lab6.commands.CollectionValidator.isMovieValid;
 
 /**
@@ -73,11 +71,10 @@ public final class CommandFactory {
                 }
             }
             case INSERT, UPDATE, REPLACE_IF_LOWER -> {
-                Movie movie;
+                Movie movie = null;
                 if (args.length == 1) {
                     movie = parseMovie(type, args);
-                }
-                else {
+                } else if (args.length == 2) {
                     movie = parseMovie(type, new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
                 }
                 // TODO: скорее всего, проверка не нужна.

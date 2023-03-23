@@ -5,9 +5,7 @@ import itmo.lab6.commands.Command;
 import itmo.lab6.server.response.Response;
 import itmo.lab6.server.response.ResponseType;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public final class ExecuteScriptCommand implements Action {
 
@@ -20,7 +18,7 @@ public final class ExecuteScriptCommand implements Action {
     @Override
     public Response run() {
         StringBuilder output = new StringBuilder();
-        commandQueue.forEach(command -> output.append(command.execute().getMessage()));
+        commandQueue.forEach(command -> output.append(command.execute().getMessage()).append("\n"));
         return new Response(output.toString(), ResponseType.SUCCESS);
     }
 }

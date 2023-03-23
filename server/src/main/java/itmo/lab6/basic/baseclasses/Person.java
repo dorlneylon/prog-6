@@ -202,6 +202,10 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         String birthday = new java.text.SimpleDateFormat("dd.MM.yyyy").format(this.birthday);
-        return prcr + "Director's name: " + whcr + name + prcr + ",\nDirector's location: " + whcr + location + prcr + ",\nDirector's height: " + whcr + height + prcr + ",\nDirector's hair color: " + whcr + hairColor + prcr + ",\nDirector's birth date: " + whcr + birthday;
+        return "Director's name: " + name + ",\n"
+                + "Director's location: " + location + ",\n"
+                + "Director's height: " + height + ",\n"
+                + "Director's hair color: " + hairColor + ",\n"
+                + "Director's birth date: " + birthday;
     }
 }

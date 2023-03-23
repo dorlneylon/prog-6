@@ -327,6 +327,13 @@ public class Movie implements Comparable<Movie>, Serializable {
 
     @Override
     public String toString() {
-        return id + ".\n" + prcr + "Film's title: " + whcr + name + ",\n" + prcr + "Film's coords: " + whcr + coordinates + ",\n" + prcr + "Creation Date: " + whcr + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n" + prcr + "Number of Oscars: " + whcr + oscarsCount + ",\n" + prcr + "Genre: " + whcr + genre + ",\n" + prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
+        return id + ".\n"
+                + "Film's title: " + name + ",\n"
+                + "Film's coords: " + coordinates + ",\n"
+                + "Creation Date: " + creationDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + ",\n"
+                + "Number of Oscars: " + oscarsCount + ",\n"
+                + "Genre: " + genre + ",\n"
+                + "Mpaa rating: " + mpaaRating + ",\n"
+                + director.toString();
     }
 }

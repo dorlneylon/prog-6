@@ -14,7 +14,7 @@ public enum CommandType implements Serializable {
     INSERT(InsertCommand.class, "insert <id> {element}: add a new element with the specified key"),
     PRINT_ASCENDING(PrintAscendingCommand.class, "print_ascending: print the elements of the collection in ascending order"),
     PRINT_DESCENDING(PrintDescendingCommand.class, "print_descending: print the elements of the collection in descending order"),
-    REMOVE_BY_MPAA_RATING(null, "remove_all_by_mpaa_rating <mpaaRating>: remove from the collection all elements whose mpaaRating field value is equivalent to the specified one"),
+    REMOVE_BY_MPAA_RATING(RemoveByMpaaRatingCommand.class, "remove_all_by_mpaa_rating <mpaaRating>: remove from the collection all elements whose mpaaRating field value is equivalent to the specified one"),
     REMOVE_GREATER(RemoveGreaterCommand.class, "remove_greater <Oscars>: remove from the collection all elements exceeding the specified"),
     REPLACE_IF_LOWER(ReplaceLowerCommand.class, "replace_if_lower <id> {element}: replace the value by key if the new value is less than the old one."),
     REMOVE_KEY(RemoveKeyCommand.class, "remove_key <id>: delete an element from the collection by its key"),

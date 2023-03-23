@@ -22,6 +22,7 @@ import java.util.*;
 
 public class Parser {
     private static Scanner scanner = new Scanner(System.in);
+    private static boolean flag = false;
 
     /**
      * This method reads object of type T from console.
@@ -59,8 +60,8 @@ public class Parser {
             field.setAccessible(true);
             // If field is Enum then converting string value to Enum<?> value.
             if (field.getType().isEnum()) {
-                System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), field.getType().getSimpleName());
-                System.out.printf("\u001B[35mEnum constants: %s\u001B[0m %n", Arrays.toString(field.getType().getEnumConstants()));
+                if (!flag) System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), field.getType().getSimpleName());
+                if (!flag) System.out.printf("\u001B[35mEnum constants: %s\u001B[0m %n", Arrays.toString(field.getType().getEnumConstants()));
                 while (true) {
                     System.out.print(">: ");
                     String value;
@@ -74,8 +75,8 @@ public class Parser {
                         setValueToField(field, object, stringToEnum(field, value));
                         break;
                     } catch (IllegalArgumentException e) {
-                        System.err.println("Enum value is not valid");
-                        System.err.println("Enum constants: " + Arrays.toString(field.getType().getEnumConstants()));
+                        if (!flag) System.err.println("Enum value is not valid");
+                        if (!flag) System.err.println("Enum constants: " + Arrays.toString(field.getType().getEnumConstants()));
                     }
                 }
                 continue;
@@ -95,7 +96,7 @@ public class Parser {
                 case "Double", "double" -> readNumber("Double", field, object);
                 case "Float", "float" -> readNumber("Float", field, object);
                 case "String" -> {
-                    System.out.printf("\u001B[35m%s (String): %n\u001B[0m", StringUtils.capitalize(field.getName()));
+                    if (!flag) System.out.printf("\u001B[35m%s (String): %n\u001B[0m", StringUtils.capitalize(field.getName()));
                     while (true) {
                         System.out.print(">: ");
                         String value;
@@ -119,7 +120,7 @@ public class Parser {
                     try {
                         field.set(object, readObject(field.getType()));
                     } catch (IllegalAccessException e) {
-                        System.err.println("Cannot read field: " + field.getName());
+                        if (!flag) System.err.println("Cannot read field: " + field.getName());
                     }
                 }
             }
@@ -129,14 +130,14 @@ public class Parser {
 
 
     private static void readNumber(String numType, Field field, Builder object) {
-        System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), numType);
+        if (!flag) System.out.printf("\u001B[35m%s (%s): %n\u001B[0m", StringUtils.capitalize(field.getName()), numType);
         while (true) {
-            System.out.print(">: ");
+            if (!flag) System.out.print(">: ");
             Number value;
             try {
                 value = NumberFormat.getInstance().parse(scanner.nextLine());
             } catch (ParseException e) {
-                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, numType, Colors.AsciiReset);
+                if (!flag) System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, numType, Colors.AsciiReset);
                 continue;
             }
 
@@ -156,14 +157,14 @@ public class Parser {
     }
 
     private static void readDate(Field field, Builder object) {
-        System.out.printf("\u001B[35m%s (Date in format dd.MM.yyyy): %n\u001B[0m", StringUtils.capitalize(field.getName()));
+        if (!flag) System.out.printf("\u001B[35m%s (Date in format dd.MM.yyyy): %n\u001B[0m", StringUtils.capitalize(field.getName()));
         while (true) {
-            System.out.print(">: ");
+            if (!flag) System.out.print(">: ");
             Date value;
             try {
                 value = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
             } catch (ParseException e) {
-                System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, "Date", Colors.AsciiReset);
+                if (!flag) System.err.printf("%sInput is not of type %s%s%n", Colors.AsciiRed, "Date", Colors.AsciiReset);
                 continue;
             }
             if (value != null) {
@@ -190,11 +191,11 @@ public class Parser {
         }
         if (valueAnnotation != null) {
             if (value.doubleValue() <= valueAnnotation.min()) {
-                System.err.printf("%sValue must be greater than %s%s%n".formatted(Colors.AsciiRed, valueAnnotation.min(), Colors.AsciiReset));
+                if (!flag) System.err.printf("%sValue must be greater than %s%s%n".formatted(Colors.AsciiRed, valueAnnotation.min(), Colors.AsciiReset));
                 return false;
             }
             if (value.doubleValue() >= valueAnnotation.max()) {
-                System.err.printf("%sValue must be less than %s%s%n".formatted(Colors.AsciiRed, valueAnnotation.max(), Colors.AsciiReset));
+                if (!flag) System.err.printf("%sValue must be less than %s%s%n".formatted(Colors.AsciiRed, valueAnnotation.max(), Colors.AsciiReset));
                 return false;
             }
         }
@@ -212,7 +213,7 @@ public class Parser {
      */
     private static boolean checkString(Field field, String value) {
         if (field.isAnnotationPresent(NotNull.class) && value.isEmpty()) {
-            System.err.println("Field can't be null");
+            if (!flag) System.err.println("Field can't be null");
             return false;
         }
         return true;
@@ -248,9 +249,9 @@ public class Parser {
         try {
             field.set(object, value);
         } catch (IllegalAccessException e) {
-            System.err.println("\u001B[31mCan't set value to field\u001B[0m");
+            if (!flag) System.err.println("\u001B[31mCan't set value to field\u001B[0m");
         } catch (InputMismatchException e) {
-            System.err.printf("%sWrong input%s%s%n", Colors.AsciiRed, e.getMessage(), Colors.AsciiReset);
+            if (!flag) System.err.printf("%sWrong input%s%s%n", Colors.AsciiRed, e.getMessage(), Colors.AsciiReset);
         }
     }
 
@@ -271,9 +272,11 @@ public class Parser {
     public static <T> @Nullable T readObject(Class<T> objectType, String[] movieArgs) {
         InputStream inputStream = new ByteArrayInputStream(String.join("\n", movieArgs).getBytes());
         Scanner oldsc = scanner;
+        flag = true;
         scanner = new Scanner(inputStream);
         T m = readObject(objectType);
         scanner = oldsc;
+        flag = false;
         return m;
     }
 }

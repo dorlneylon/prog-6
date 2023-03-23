@@ -1,6 +1,8 @@
 package itmo.lab6.commands;
 
+import itmo.lab6.basic.auxiliary.Convertible;
 import itmo.lab6.basic.baseclasses.Movie;
+import itmo.lab6.basic.baseenums.MpaaRating;
 import itmo.lab6.basic.utils.files.FileUtils;
 import itmo.lab6.basic.utils.files.ScriptExecutor;
 import itmo.lab6.basic.utils.parser.Parser;
@@ -58,6 +60,18 @@ public final class CommandFactory {
                     yield null;
                 }
             }
+            case REMOVE_BY_MPAA_RATING -> {
+                if (args.length < 1) {
+                    System.err.println("Not enough arguments for command " + type.name());
+                    yield null;
+                }
+                try {
+                    yield new Command(type, Convertible.convert(args[0], MpaaRating.class));
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Invalid argument for command " + type.name());
+                    yield null;
+                }
+            }
             case INSERT, UPDATE, REPLACE_IF_LOWER -> {
                 Movie movie;
                 if (args.length == 1) {
@@ -84,8 +98,6 @@ public final class CommandFactory {
     }
 
     public static Movie parseMovie(CommandType type, String[] args, String[] movieArgs) {
-        if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
-
         Movie movie = Parser.readObject(Movie.class, movieArgs);
         Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
         return movie;

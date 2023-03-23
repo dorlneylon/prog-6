@@ -74,7 +74,7 @@ public final class CommandFactory {
                 Movie movie = null;
                 if (args.length == 1) {
                     movie = parseMovie(type, args);
-                } else if (args.length == 2) {
+                } else if (args.length >= 2) {
                     movie = parseMovie(type, new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
                 }
                 // TODO: скорее всего, проверка не нужна.

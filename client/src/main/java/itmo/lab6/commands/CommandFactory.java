@@ -6,8 +6,10 @@ import itmo.lab6.basic.baseenums.MpaaRating;
 import itmo.lab6.basic.utils.files.FileUtils;
 import itmo.lab6.basic.utils.files.ScriptExecutor;
 import itmo.lab6.basic.utils.parser.Parser;
+import itmo.lab6.connection.Connector;
 
 import java.io.File;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -45,7 +47,15 @@ public final class CommandFactory {
                 ArrayList<Command> commands = new ScriptExecutor(new File(filePath)).readScript().getCommandList();
                 yield new Command(type, commands);
             }
-            case HELP, PRINT_ASCENDING, PRINT_DESCENDING, HISTORY, INFO, SHOW, CLEAR -> new Command(type);
+            case HELP, PRINT_ASCENDING, PRINT_DESCENDING, INFO, SHOW, CLEAR -> new Command(type);
+            case HISTORY -> {
+                try {
+                    yield new Command(type, InetAddress.getLoopbackAddress(), Connector.getPort());
+                } catch (Exception e) {
+                    System.err.println("Error: " + e.getMessage());
+                    yield null;
+                }
+            }
             case REMOVE_GREATER, REMOVE_KEY -> {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + type.name());
@@ -75,7 +85,7 @@ public final class CommandFactory {
                 if (args.length == 1) {
                     movie = parseMovie(type, args);
                 } else if (args.length >= 2) {
-                    movie = parseMovie(type, new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
+                    movie = parseMovie(new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
                 }
                 // TODO: скорее всего, проверка не нужна.
                 if (movie != null) yield new Command(type, movie);
@@ -86,6 +96,13 @@ public final class CommandFactory {
         };
     }
 
+    /**
+     * Parses movie from console
+     *
+     * @param type command type
+     * @param args command arguments
+     * @return read movie from console
+     */
     public static Movie parseMovie(CommandType type, String[] args) {
         if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
 
@@ -94,7 +111,14 @@ public final class CommandFactory {
         return movie;
     }
 
-    public static Movie parseMovie(CommandType type, String[] args, String[] movieArgs) {
+    /**
+     * Parses movie from file
+     *
+     * @param args      command args
+     * @param movieArgs movie args
+     * @return read movie from file
+     */
+    public static Movie parseMovie(String[] args, String[] movieArgs) {
         Movie movie = Parser.readObject(Movie.class, movieArgs);
         Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
         return movie;

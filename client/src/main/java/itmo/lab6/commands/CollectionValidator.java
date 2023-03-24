@@ -29,7 +29,7 @@ public final class CollectionValidator {
             System.err.println("Not enough arguments for command " + type.name());
             return null;
         }
-        Long key;
+        long key;
         try {
             key = Long.parseLong(args[0]);
             if (!checkIfExists(type, key)) {

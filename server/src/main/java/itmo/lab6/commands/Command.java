@@ -41,8 +41,12 @@ public final class Command implements Serializable {
                 constructor = executableClass.getDeclaredConstructor();
                 instance = constructor.newInstance();
             } else {
-                Class<?> clazz = arguments[0].getClass();
-                constructor = executableClass.getDeclaredConstructor(clazz);
+                // Reading all arguments and getting constructor with this type(s).
+                Class<?>[] argumentsTypes = new Class[arguments.length];
+                for (int i = 0; i < arguments.length; i++) {
+                    argumentsTypes[i] = arguments[i].getClass();
+                }
+                constructor = executableClass.getDeclaredConstructor(argumentsTypes);
                 try {
                     instance = constructor.newInstance(arguments);
                 } catch (Exception e) {

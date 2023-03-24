@@ -21,6 +21,11 @@ public final class Time {
         return java.time.LocalDateTime.now(java.time.ZoneId.of("Europe/Moscow"));
     }
 
+    /**
+     * Get current time +4 hours from UTC (Moscow time)
+     *
+     * @return current time +4 hours from UTC
+     */
     public static ZonedDateTime getZonedDateTime() {
         return ZonedDateTime.now(java.time.ZoneId.of("Europe/Moscow"));
     }

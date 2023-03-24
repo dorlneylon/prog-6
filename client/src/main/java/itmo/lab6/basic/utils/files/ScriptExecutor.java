@@ -11,19 +11,42 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.*;
 
+/**
+ * ScriptExecutor is used to execute script files
+ */
 public class ScriptExecutor {
+    /**
+     * Command list
+     */
     private final ArrayList<Command> commandQue = new ArrayList<>();
+    /**
+     * Main script file
+     */
     private final File scriptFile;
+    /**
+     * List of executing commands
+     */
     private final ArrayDeque<File> filesMemory = new ArrayDeque<>();
 
     public ScriptExecutor(File scriptFile) {
         this.scriptFile = scriptFile;
     }
 
+    /**
+     * Returns command list
+     *
+     * @return command list
+     */
     public ArrayList<Command> getCommandList() {
         return commandQue;
     }
 
+    /**
+     * Reads given file line by line and adds commands to the command list
+     *
+     * @param scriptFile File to execute
+     * @return this
+     */
     private ScriptExecutor readScript(File scriptFile) {
         // создадим каунтер для пропуска лишних строк
         int skipLines = 0;
@@ -34,9 +57,9 @@ public class ScriptExecutor {
             throw new RuntimeException(e);
         }
         filesMemory.add(scriptFile);
-        for (String line : lines) {
+        for (int index = 0; index < lines.size(); index++) {
             if (skipLines-- > 0) continue;
-
+            String line = lines.get(index);
             String[] args = {};
             String[] lineSplit = line.split(" ");
             if (lineSplit.length > 1) {
@@ -56,10 +79,14 @@ public class ScriptExecutor {
             }
             if (Set.of(CommandType.INSERT, CommandType.UPDATE, CommandType.REPLACE_IF_LOWER).contains(commandType)) {
                 if (args.length < 1) {
-                    System.err.println("Not enough arguments for command " + commandType);
+                    System.err.println("Not enough arguments for command " + commandType + ". Skipping line: " + line);
                     continue;
                 }
-                String[] movieArgs = lines.subList(lines.indexOf(line) + 1, lines.indexOf(line) + 14).toArray(new String[0]);
+                if (index + 13 >= lines.size()) {
+                    System.err.println("Not enough data for command " + commandType + ". Skipping line: " + line);
+                    continue;
+                }
+                String[] movieArgs = lines.subList(index + 1, index + 14).toArray(new String[0]);
                 skipLines = 13;
                 args = new String[movieArgs.length + 1];
                 args[0] = lineSplit[1];

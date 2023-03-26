@@ -10,7 +10,7 @@ public class ServerLogger {
 
     static {
         try {
-            fileHandler = new FileHandler("ServerLogger.log");
+            fileHandler = new FileHandler("server_logs.log");
             logger.addHandler(fileHandler);
         } catch (IOException e) {
             throw new RuntimeException(e);

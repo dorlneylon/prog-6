@@ -4,6 +4,7 @@ import itmo.lab6.basic.utils.serializer.CommandSerializer;
 import itmo.lab6.commands.*;
 import itmo.lab6.connection.Connector;
 
+import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -11,9 +12,9 @@ import java.util.Scanner;
 public class ClientCore {
     private final Connector connector;
 
-    public ClientCore(int port) {
+    public ClientCore(InetAddress address, int port) {
         try {
-            connector = new Connector(port);
+            connector = new Connector(address, port);
             connector.setBufferSize(8192 * 8192);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -31,10 +32,7 @@ public class ClientCore {
             String[] args = Arrays.copyOfRange(userInput, 1, userInput.length);
             CommandType commandType = CommandUtils.getCommandType(userInput[0]);
             Command command = CommandFactory.createCommand(commandType, args);
-            if (command == null) {
-                System.out.println("Invalid or unknown command.");
-                continue;
-            }
+            if (command == null) continue;
             try {
                 connector.send(CommandSerializer.serialize(command));
                 String response = connector.receive();

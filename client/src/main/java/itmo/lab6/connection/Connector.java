@@ -11,27 +11,12 @@ public class Connector {
      * Socket for UDP connection
      */
     private static DatagramSocket socket;
-    /**
-     * Localhost address
-     */
     private final InetAddress address;
-    /**
-     * Local host port
-     */
     private final int port;
     private final static int socketTimeout = 8000;
-    private byte[] buffer;
 
     private int BUFFER_SIZE;
 
-    /**
-     * Constructor with default server port
-     *
-     * @throws Exception Socket exception
-     */
-    public Connector() throws Exception {
-        this(8080);
-    }
 
     /**
      * Connector constructor with specified server port
@@ -39,10 +24,10 @@ public class Connector {
      * @param port server port
      * @throws Exception Socket exception
      */
-    public Connector(int port) throws Exception {
+    public Connector(InetAddress address, int port) throws Exception {
         socket = new DatagramSocket();
         socket.setSoTimeout(socketTimeout);
-        this.address = InetAddress.getLocalHost();
+        this.address = address;
         this.port = port;
     }
 
@@ -89,8 +74,8 @@ public class Connector {
      * @throws IOException Receiving exception
      */
     public String receive() throws IOException {
-        this.buffer = new byte[BUFFER_SIZE];
-        DatagramPacket packet = new DatagramPacket(this.buffer, this.buffer.length);
+        byte[] buffer = new byte[BUFFER_SIZE];
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         try {
             socket.receive(packet);
         } catch (SocketTimeoutException e) {

@@ -1,0 +1,4 @@
+;server port
+server_port=5050
+;file name for saving and reading collection
+collection_file=server.xml

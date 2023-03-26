@@ -1,5 +1,6 @@
 package itmo.lab6.commands;
 
+import itmo.lab6.ServerMain;
 import itmo.lab6.server.ClientAddress;
 import itmo.lab6.xml.Xml;
 
@@ -26,7 +27,8 @@ public class CommandHandler {
         // TODO: избавиться от if'а
         // if (command.getCommandType() == CommandType.HISTORY) command.setArguments(sender);
         channel.send(ByteBuffer.wrap(command.execute().getMessage().getBytes()), sender);
-        commandHistory.get(new ClientAddress(sender.getAddress(), sender.getPort())).push(command.getCommandType().toString());
-        new Xml(new File("col.xml")).newWriter().writeCollection(collection);
+        if (!command.getCommandType().equals(CommandType.SERVICE))
+            commandHistory.get(new ClientAddress(sender.getAddress(), sender.getPort())).push(command.getCommandType().toString());
+        new Xml(new File(ServerMain.collectionFileName), true).newWriter().writeCollection(collection);
     }
 }

@@ -37,12 +37,12 @@ public final class CommandFactory {
             case EXECUTE_SCRIPT -> {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + CommandType.EXECUTE_SCRIPT);
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
                 String filePath = args[0];
                 if (!FileUtils.isFileExist(filePath)) {
                     System.err.println("Script file does not exist: " + filePath);
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
                 ArrayList<Command> commands = new ScriptExecutor(new File(filePath)).readScript().getCommandList();
                 yield new Command(type, commands);
@@ -59,25 +59,25 @@ public final class CommandFactory {
             case REMOVE_GREATER, REMOVE_KEY -> {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + type.name());
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
                 try {
                     yield new Command(type, Long.parseLong(args[0]));
                 } catch (NumberFormatException e) {
                     System.err.println("Invalid argument for command " + type.name());
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
             }
             case REMOVE_BY_MPAA_RATING -> {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + type.name());
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
                 try {
                     yield new Command(type, Convertible.convert(args[0], MpaaRating.class));
                 } catch (IllegalArgumentException e) {
                     System.err.println("Invalid argument for command " + type.name());
-                    yield new Command(CommandType.SERVICE, "");
+                    yield null;
                 }
             }
             case INSERT, UPDATE, REPLACE_IF_LOWER -> {
@@ -89,10 +89,13 @@ public final class CommandFactory {
                 }
                 // TODO: скорее всего, проверка не нужна.
                 if (movie != null) yield new Command(type, movie);
-                yield new Command(CommandType.SERVICE, "");
+                yield null;
             }
             // DEFAULT command
-            default -> null;
+            default -> {
+                System.err.println("Unknown command.");
+                yield null;
+            }
         };
     }
 

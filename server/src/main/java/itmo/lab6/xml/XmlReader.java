@@ -20,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Objects;
 
 import static itmo.lab6.utils.string.StringUtils.toCamelCase;
@@ -36,7 +35,7 @@ public class XmlReader extends XmlAction {
 
     public MovieCollection parse() {
         MovieCollection movieCollection;
-        movieCollection = readXML(xml.xmlFile());
+        movieCollection = readXML(xml.getXmlFile());
         // Checking product uniqueness
         if (movieCollection.size() > 1) {
             for (Movie movie : movieCollection.values()) {
@@ -50,6 +49,7 @@ public class XmlReader extends XmlAction {
         return movieCollection;
     }
 
+    @Deprecated(forRemoval = true)
     public MovieCollection parse(File file) {
         MovieCollection movieCollection;
         movieCollection = readXML(file);

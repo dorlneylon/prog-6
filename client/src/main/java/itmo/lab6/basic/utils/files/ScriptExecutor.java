@@ -48,8 +48,6 @@ public class ScriptExecutor {
      * @return this
      */
     private ScriptExecutor readScript(File scriptFile) {
-        // создадим каунтер для пропуска лишних строк
-        int skipLines = 0;
         List<String> lines;
         try {
             lines = Files.readAllLines(scriptFile.toPath(), StandardCharsets.UTF_8);
@@ -58,15 +56,9 @@ public class ScriptExecutor {
         }
         filesMemory.add(scriptFile);
         for (int index = 0; index < lines.size(); index++) {
-            if (skipLines-- > 0) continue;
             String line = lines.get(index);
-            String[] args = {};
-            String[] lineSplit = line.split(" ");
-            if (lineSplit.length > 1) {
-                args = Arrays.copyOfRange(lineSplit, 1, lineSplit.length);
-            }
-
-            CommandType commandType = CommandUtils.getCommandType(lineSplit[0]);
+            CommandType commandType = CommandUtils.getCommandType(line.split(" ")[0]);
+            String[] args = Arrays.copyOfRange(line.split(" "), 1, line.split(" ").length);
             if (commandType == CommandType.EXECUTE_SCRIPT) {
                 if (filesMemory.contains(new File(args[0]))) {
                     System.err.println("Recursive file execution. Skipping line: " + line);
@@ -78,27 +70,23 @@ public class ScriptExecutor {
                 }
             }
             if (Set.of(CommandType.INSERT, CommandType.UPDATE, CommandType.REPLACE_IF_LOWER).contains(commandType)) {
-                if (args.length < 1) {
-                    System.err.println("Not enough arguments for command " + commandType + ". Skipping line: " + line);
-                    continue;
-                }
-                if (index + 13 >= lines.size()) {
-                    System.err.println("Not enough data for command " + commandType + ". Skipping line: " + line);
+                if (args.length < 1 || index + 13 >= lines.size()) {
+                    System.err.println("Not enough arguments/data for command " + commandType + ". Skipping line: " + line);
                     continue;
                 }
                 String[] movieArgs = lines.subList(index + 1, index + 14).toArray(new String[0]);
-                skipLines = 13;
                 args = new String[movieArgs.length + 1];
-                args[0] = lineSplit[1];
+                args[0] = line.split(" ")[1];
                 System.arraycopy(movieArgs, 0, args, 1, movieArgs.length);
+                index += 13;
             }
-
             Command cmd = CommandFactory.createCommand(commandType, args);
             if (cmd != null) commandQue.add(cmd);
         }
         filesMemory.pop();
         return this;
     }
+
 
     public ScriptExecutor readScript() {
         return this.readScript(scriptFile);

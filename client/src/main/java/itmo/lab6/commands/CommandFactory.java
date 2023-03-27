@@ -5,7 +5,9 @@ import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.baseenums.MpaaRating;
 import itmo.lab6.basic.utils.files.FileUtils;
 import itmo.lab6.basic.utils.files.ScriptExecutor;
-import itmo.lab6.basic.utils.parser.Parser;
+import itmo.lab6.basic.utils.parser.ArgumentParser;
+import itmo.lab6.basic.utils.parser.UserInputParser;
+import itmo.lab6.basic.utils.parser.exceptions.ObjectParsingException;
 import itmo.lab6.connection.Connector;
 
 import java.io.File;
@@ -85,9 +87,8 @@ public final class CommandFactory {
                 if (args.length == 1) {
                     movie = parseMovie(type, args);
                 } else if (args.length >= 2) {
-                    movie = parseMovie(new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
+                    movie = parseMovie(type, new String[]{args[0]}, Arrays.copyOfRange(args, 1, args.length));
                 }
-                // TODO: скорее всего, проверка не нужна.
                 if (movie != null) yield new Command(type, movie);
                 yield null;
             }
@@ -109,7 +110,7 @@ public final class CommandFactory {
     public static Movie parseMovie(CommandType type, String[] args) {
         if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
 
-        Movie movie = Parser.readObject(Movie.class);
+        Movie movie = new UserInputParser().readObject(Movie.class);
         Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
         return movie;
     }
@@ -121,9 +122,15 @@ public final class CommandFactory {
      * @param movieArgs movie args
      * @return read movie from file
      */
-    public static Movie parseMovie(String[] args, String[] movieArgs) {
-        Movie movie = Parser.readObject(Movie.class, movieArgs);
-        Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
+    public static Movie parseMovie(CommandType type, String[] args, String[] movieArgs) {
+        // if (Boolean.FALSE.equals(isMovieValid(type, args))) return null;
+        Movie movie = null;
+        try {
+            movie = new ArgumentParser(movieArgs).readObject(Movie.class);
+            Objects.requireNonNull(movie).setId(Long.parseLong(args[0]));
+        } catch (ObjectParsingException e) {
+            System.err.println("Error parsing: " + e.getMessage());
+        }
         return movie;
     }
 }

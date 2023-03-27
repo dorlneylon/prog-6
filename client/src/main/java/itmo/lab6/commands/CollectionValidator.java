@@ -21,7 +21,15 @@ public final class CollectionValidator {
      */
     public static Boolean checkIfExists(CommandType command, Long key) throws Exception {
         connector.send(CommandSerializer.serialize(new Command(CommandType.SERVICE, "check_id %d".formatted(key))));
-        return (command.equals(CommandType.INSERT) && Boolean.FALSE.equals(Boolean.parseBoolean(connector.receive()))) || ((command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) && Boolean.TRUE.equals(Boolean.parseBoolean(connector.receive())));
+        Boolean receivedStatus = Boolean.parseBoolean(connector.receive());
+        if (command.equals(CommandType.INSERT)) {
+            // True if key does not exist
+            return Boolean.FALSE.equals(receivedStatus);
+        } else if (command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) {
+            // True if key exists
+            return Boolean.TRUE.equals(receivedStatus);
+        }
+        return false;
     }
 
     public static Boolean isMovieValid(CommandType type, String[] args) {
@@ -32,7 +40,7 @@ public final class CollectionValidator {
         long key;
         try {
             key = Long.parseLong(args[0]);
-            if (!checkIfExists(type, key)) {
+            if (checkIfExists(type, key)) {
                 System.err.println("Key " + key + " is not compatible with the command " + type.name() + ".");
                 return false;
             }
@@ -40,7 +48,6 @@ public final class CollectionValidator {
             System.err.println("Invalid argument for command " + type.name());
             return false;
         }
-
         return true;
     }
 }

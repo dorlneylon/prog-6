@@ -61,9 +61,8 @@ public class UdpServer {
                         try {
                             handlePacket(inetSocketAddress, data);
                         } catch (Exception e) {
-                            // Думаю, нам стоит убрать этот send.
-                            keyChannel.send(ByteBuffer.wrap(e.getMessage().getBytes()), inetSocketAddress);
-                            ServerLogger.getLogger().warning(e.getMessage());
+                            keyChannel.send(ByteBuffer.wrap("ERROR: Something went wrong...".getBytes()), inetSocketAddress);
+                            ServerLogger.getLogger().warning(e.toString());
                         }
                     }
                 }

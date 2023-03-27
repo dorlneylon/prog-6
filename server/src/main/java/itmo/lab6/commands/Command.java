@@ -47,12 +47,7 @@ public final class Command implements Serializable {
                     argumentsTypes[i] = arguments[i].getClass();
                 }
                 constructor = executableClass.getDeclaredConstructor(argumentsTypes);
-                try {
-                    instance = constructor.newInstance(arguments);
-                } catch (Exception e) {
-                    ServerLogger.getLogger().warning("Unable to execute command: " + e.getMessage());
-                    return new Response("Unable to execute command: wrong number of arguments", ResponseType.ERROR);
-                }
+                instance = constructor.newInstance(arguments);
             }
             return ((Action) instance).run();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException |

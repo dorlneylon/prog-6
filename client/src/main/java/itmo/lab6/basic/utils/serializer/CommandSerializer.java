@@ -26,13 +26,13 @@ public final class CommandSerializer {
             objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         } catch (IOException e) {
             System.err.println("Unable to create ObjectOutputStream: " + e);
-            return null;
+            return new byte[0];
         }
         try {
             objectOutputStream.writeObject(object);
         } catch (IOException e) {
             System.err.println("Unable to serialize object: " + object.getClass().getSimpleName() + ": " + e);
-            return null;
+            return new byte[0];
         }
         try {
             objectOutputStream.close();

@@ -1,13 +1,11 @@
 package itmo.lab6.core;
 
-import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.utils.serializer.CommandSerializer;
 import itmo.lab6.basic.utils.types.SubArrayIterator;
 import itmo.lab6.commands.*;
 import itmo.lab6.connection.Connector;
 
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +17,7 @@ public class ClientCore {
     public ClientCore(InetAddress address, int port) {
         try {
             connector = new Connector(address, port);
-            connector.setBufferSize(8192 * 8192);
+            connector.setBufferSize(1024);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

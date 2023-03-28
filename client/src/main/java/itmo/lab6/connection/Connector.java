@@ -1,5 +1,7 @@
 package itmo.lab6.connection;
 
+import itmo.lab6.basic.utils.terminal.Colors;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -17,9 +19,9 @@ public class Connector {
     private static DatagramSocket socket;
     private final InetAddress address;
     private final int port;
-    private final static int socketTimeout = 8000;
+    private final static int socketTimeout = 4000;
 
-    private int BUFFER_SIZE;
+    private int chunkSize;
 
 
     /**
@@ -47,7 +49,7 @@ public class Connector {
     public void setBufferSize(int size) throws SocketException {
         socket.setReceiveBufferSize(size);
         socket.setSendBufferSize(size);
-        BUFFER_SIZE = size;
+        this.chunkSize = size;
     }
 
     /**
@@ -67,21 +69,21 @@ public class Connector {
      * @throws Exception sending exceptions
      */
     public void send(byte[] bytes) throws Exception {
-        final int chunkSize = 1024; // 1Kb chunk size + number of chunks
         int numChunks = (int) Math.ceil((double) bytes.length / chunkSize);
         for (int i = 0; i < numChunks; i++) {
             int offset = i * chunkSize;
             int length = Math.min(bytes.length - offset, chunkSize);
             byte[] chunk = new byte[length + 1];
-            if (i != 0 && i % 20 == 0) {
-                System.out.println(i);
-                Thread.sleep(1000);
-            }
             chunk[length] = (numChunks == 1 || i + 1 == numChunks) ? (byte) 0 : (byte) 1; // has next flag
             System.arraycopy(bytes, offset, chunk, 0, length);
             DatagramPacket datagramPacket = new DatagramPacket(chunk, length + 1, this.address, port);
             socket.send(datagramPacket);
+            if (i != 0 && i % 50 == 0) {
+                System.out.printf("%sSending chunks:%s %d/%d kb\r", Colors.AsciiPurple, Colors.AsciiReset, i + 1, numChunks);
+                Thread.sleep(100);
+            }
         }
+        System.out.print("");
     }
 
     /**
@@ -92,7 +94,7 @@ public class Connector {
      */
     public String receive() throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        byte[] buffer = new byte[1025];
+        byte[] buffer = new byte[chunkSize + 1];
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         socket.receive(packet);
         boolean hasNext = (packet.getData()[packet.getLength() - 1] & 0xFF) == 1; // last byte is a flag

@@ -1,25 +1,2 @@
 <MovieCollection>
-    <Movie>
-        <id>1</id>
-        <name>fd</name>
-        <Coordinates>
-            <x>100.0</x>
-            <y>200</y>
-        </Coordinates>
-        <creation_date>2023-03-28T17:05:53.030202031+03:00[Europe/Moscow]</creation_date>
-        <oscars_count>300</oscars_count>
-        <genre>COMEDY</genre>
-        <mpaa_rating>PG</mpaa_rating>
-        <Director>
-            <name>фвыа</name>
-            <birthday>22.10.2223</birthday>
-            <height>1488</height>
-            <hair_color>BLACK</hair_color>
-            <Location>
-                <x>3</x>
-                <y>2.0</y>
-                <z>1.0</z>
-            </Location>
-        </Director>
-    </Movie>
 </MovieCollection>

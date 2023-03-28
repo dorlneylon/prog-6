@@ -12,6 +12,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import static itmo.lab6.commands.CommandHandler.handlePacket;
 import static itmo.lab6.commands.CommandHandler.setChannel;
@@ -39,6 +40,7 @@ public class UdpServer {
             selector = Selector.open();
             datagramChannel.register(selector, SelectionKey.OP_READ);
             ServerLogger.getLogger().info("Starting server on port " + port);
+            Map<InetSocketAddress, ByteArrayOutputStream> byteStreams = new HashMap<>();
             while (true) {
                 selector.select();
                 Iterator<SelectionKey> keys = selector.selectedKeys().iterator();
@@ -52,32 +54,28 @@ public class UdpServer {
                         DatagramChannel keyChannel = (DatagramChannel) key.channel();
                         setChannel(keyChannel);
                         ByteBuffer buffer = ByteBuffer.allocate(1025);
-                        // Receiving first packet
                         InetSocketAddress inetSocketAddress = (InetSocketAddress) keyChannel.receive(buffer);
                         ClientAddress clientAddress = new ClientAddress(inetSocketAddress.getAddress(), inetSocketAddress.getPort());
-                        if (!commandHistory.containsKey(clientAddress))
+                        if (!commandHistory.containsKey(clientAddress)) {
                             commandHistory.put(clientAddress, new SizedStack<>(7));
-                        buffer.flip();
-                        byte[] data = new byte[buffer.limit()];
-                        buffer.get(data);
-                        buffer.clear();
-                        boolean hasNext = (data[data.length - 1] & 0xFF) == 1; // last byte is a flag
-                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                        bos.write(data, 0, data.length - 1);
-                        while (hasNext) {
-                            keyChannel.receive(buffer);
-                            buffer.flip();
-                            data = new byte[buffer.limit()];
-                            buffer.get(data);
-                            buffer.clear();
-                            hasNext = (data[data.length - 1] & 0xFF) == 1; // last byte is a flag
-                            bos.write(data, 0, data.length - 1);
                         }
-                        try {
-                            handlePacket(inetSocketAddress, bos.toByteArray());
-                        } catch (Exception e) {
-                            keyChannel.send(ByteBuffer.wrap("ERROR: Something went wrong...".getBytes()), inetSocketAddress);
-                            ServerLogger.getLogger().warning(e.toString());
+
+                        ByteArrayOutputStream byteStream = byteStreams.get(inetSocketAddress);
+                        if (byteStream == null) {
+                            byteStream = new ByteArrayOutputStream();
+                            byteStreams.put(inetSocketAddress, byteStream);
+                        }
+                        boolean hasNext = buffer.array()[buffer.limit() - 1] == 1;
+                        byteStream.write(buffer.array(), 0, buffer.limit() - 1);
+                        if (!hasNext) {
+                            // We've received the last packet, so handle the message
+                            try {
+                                handlePacket(inetSocketAddress, byteStream.toByteArray());
+                            } catch (Exception e) {
+                                keyChannel.send(ByteBuffer.wrap("ERROR: Something went wrong...".getBytes()), inetSocketAddress);
+                                ServerLogger.getLogger().warning(e.toString());
+                            }
+                            byteStreams.remove(inetSocketAddress);
                         }
                     }
                 }
@@ -93,4 +91,5 @@ public class UdpServer {
             }
         }
     }
+
 }

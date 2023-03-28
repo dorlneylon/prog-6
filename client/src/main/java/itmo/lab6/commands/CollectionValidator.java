@@ -27,7 +27,7 @@ public final class CollectionValidator {
             return Boolean.TRUE.equals(receivedStatus);
         } else if (command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) {
             // True if key exists
-            return Boolean.TRUE.equals(receivedStatus);
+            return Boolean.FALSE.equals(receivedStatus);
         }
         return false;
     }

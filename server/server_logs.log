@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-03-28T15:13:33.137202Z</date>
+  <millis>1680016413137</millis>
+  <nanos>202000</nanos>
+  <sequence>0</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.server.UdpServer</class>
+  <method>run</method>
+  <thread>18</thread>
+  <message>Starting server on port 5050</message>
+</record>
+</log>

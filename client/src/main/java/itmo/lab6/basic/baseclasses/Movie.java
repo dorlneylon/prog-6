@@ -361,4 +361,5 @@ public class Movie implements Comparable<Movie>, Serializable {
 			+ prcr + "Genre: " + whcr + genre + ",\n"
 			+ prcr + "Mpaa rating: " + whcr + mpaaRating + ",\n" + director.toString();
 	}
+
 }

@@ -1,11 +1,15 @@
 package itmo.lab6.core;
 
+import itmo.lab6.basic.baseclasses.Movie;
 import itmo.lab6.basic.utils.serializer.CommandSerializer;
+import itmo.lab6.basic.utils.types.SubArrayIterator;
 import itmo.lab6.commands.*;
 import itmo.lab6.connection.Connector;
 
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -36,6 +40,24 @@ public class ClientCore {
             try {
                 connector.send(CommandSerializer.serialize(command));
                 String response = connector.receive();
+
+                if (List.of(CommandType.SHOW, CommandType.PRINT_ASCENDING, CommandType.PRINT_DESCENDING).contains(commandType)) {
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    String[] movies = response.split(".\\n\\d.");
+                    SubArrayIterator<String> iterator = new SubArrayIterator<>(movies, 10);
+                    while (iterator.hasNext()) {
+                        for (String movie : List.of(iterator.next())) {
+                            System.out.println(movie);
+                        }
+                        if (iterator.hasNext()) {
+                            System.out.println("Press enter to continue, Press q to stop");
+                            String ans = scanner.nextLine();
+                            if (ans.equals("q")) break;
+                        }
+                    }
+                }
+
                 if (!response.isEmpty()) System.out.println(response);
             } catch (Exception e) {
                 System.err.println("Unable to send/receive request/response to/from the server: " + e.getMessage());

@@ -17,7 +17,7 @@ public class ClientCore {
     public ClientCore(InetAddress address, int port) {
         try {
             connector = new Connector(address, port);
-            connector.setBufferSize(1024);
+            connector.setBufferSize(8192*8129);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -49,7 +49,7 @@ public class Connector {
     public void setBufferSize(int size) throws SocketException {
         socket.setReceiveBufferSize(size);
         socket.setSendBufferSize(size);
-        this.chunkSize = size;
+        this.chunkSize = 1024;
     }
 
     /**

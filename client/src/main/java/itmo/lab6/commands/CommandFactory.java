@@ -32,7 +32,7 @@ public final class CommandFactory {
     public static Command createCommand(CommandType type, String[] args) {
         return switch (type) {
             case EXIT -> {
-                System.out.println("Shutting down...");
+                 System.out.println("Shutting down...");
                 System.exit(0);
                 yield null;
             }
@@ -70,13 +70,18 @@ public final class CommandFactory {
                     yield null;
                 }
             }
-            case REMOVE_BY_MPAA_RATING -> {
+            case REMOVE_ALL_BY_MPAA_RATING -> {
                 if (args.length < 1) {
                     System.err.println("Not enough arguments for command " + type.name());
                     yield null;
                 }
                 try {
-                    yield new Command(type, Convertible.convert(args[0], MpaaRating.class));
+                    MpaaRating rating = Convertible.convert(args[0], MpaaRating.class);
+                    if (rating == null) {
+                        System.err.println("Invalid MPAA rating. List of available MPAA ratings: " + Arrays.toString(MpaaRating.class.getEnumConstants()));
+                        yield null;
+                    }
+                    yield new Command(type, rating);
                 } catch (IllegalArgumentException e) {
                     System.err.println("Invalid argument for command " + type.name());
                     yield null;

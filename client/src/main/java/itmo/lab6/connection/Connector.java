@@ -1,7 +1,11 @@
 package itmo.lab6.connection;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.*;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 
 /**
  * Connector is used to connect to a remote server
@@ -63,8 +67,21 @@ public class Connector {
      * @throws Exception sending exceptions
      */
     public void send(byte[] bytes) throws Exception {
-        DatagramPacket packet = new DatagramPacket(bytes, bytes.length, this.address, port);
-        socket.send(packet);
+        final int chunkSize = 1024; // 1Kb chunk size + number of chunks
+        int numChunks = (int) Math.ceil((double) bytes.length / chunkSize);
+        for (int i = 0; i < numChunks; i++) {
+            int offset = i * chunkSize;
+            int length = Math.min(bytes.length - offset, chunkSize);
+            byte[] chunk = new byte[length + 1];
+            if (i != 0 && i % 20 == 0) {
+                System.out.println(i);
+                Thread.sleep(1000);
+            }
+            chunk[length] = (numChunks == 1 || i + 1 == numChunks) ? (byte) 0 : (byte) 1; // has next flag
+            System.arraycopy(bytes, offset, chunk, 0, length);
+            DatagramPacket datagramPacket = new DatagramPacket(chunk, length + 1, this.address, port);
+            socket.send(datagramPacket);
+        }
     }
 
     /**
@@ -74,13 +91,17 @@ public class Connector {
      * @throws IOException Receiving exception
      */
     public String receive() throws IOException {
-        byte[] buffer = new byte[BUFFER_SIZE];
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1025];
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-        try {
+        socket.receive(packet);
+        boolean hasNext = (packet.getData()[packet.getLength() - 1] & 0xFF) == 1; // last byte is a flag
+        bos.write(packet.getData(), 0, packet.getLength() - 1);
+        while (hasNext) {
             socket.receive(packet);
-        } catch (SocketTimeoutException e) {
-            return "Waiting time for reply from server exceeded... The server is not available.";
+            hasNext = (packet.getData()[packet.getLength() - 1] & 0xFF) == 1;
+            bos.write(packet.getData(), 0, packet.getLength() - 1);
         }
-        return new String(packet.getData(), 0, packet.getLength());
+        return bos.toString();
     }
 }

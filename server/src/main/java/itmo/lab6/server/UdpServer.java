@@ -3,6 +3,7 @@ package itmo.lab6.server;
 import itmo.lab6.basic.moviecollection.MovieCollection;
 import itmo.lab6.utils.SizedStack;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -16,7 +17,7 @@ import static itmo.lab6.commands.CommandHandler.handlePacket;
 import static itmo.lab6.commands.CommandHandler.setChannel;
 
 public class UdpServer {
-    private static final int BUFFER_SIZE = 8192 * 8192;
+    private static final int BUFFER_SIZE = 1025;
     public static MovieCollection collection;
     public static HashMap<ClientAddress, SizedStack<String>> commandHistory = new HashMap<>();
     private final int port;
@@ -50,7 +51,8 @@ public class UdpServer {
                     if (key.isReadable()) {
                         DatagramChannel keyChannel = (DatagramChannel) key.channel();
                         setChannel(keyChannel);
-                        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
+                        ByteBuffer buffer = ByteBuffer.allocate(1025);
+                        // Receiving first packet
                         InetSocketAddress inetSocketAddress = (InetSocketAddress) keyChannel.receive(buffer);
                         ClientAddress clientAddress = new ClientAddress(inetSocketAddress.getAddress(), inetSocketAddress.getPort());
                         if (!commandHistory.containsKey(clientAddress))
@@ -58,8 +60,21 @@ public class UdpServer {
                         buffer.flip();
                         byte[] data = new byte[buffer.limit()];
                         buffer.get(data);
+                        buffer.clear();
+                        boolean hasNext = (data[data.length - 1] & 0xFF) == 1; // last byte is a flag
+                        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                        bos.write(data, 0, data.length - 1);
+                        while (hasNext) {
+                            keyChannel.receive(buffer);
+                            buffer.flip();
+                            data = new byte[buffer.limit()];
+                            buffer.get(data);
+                            buffer.clear();
+                            hasNext = (data[data.length - 1] & 0xFF) == 1; // last byte is a flag
+                            bos.write(data, 0, data.length - 1);
+                        }
                         try {
-                            handlePacket(inetSocketAddress, data);
+                            handlePacket(inetSocketAddress, bos.toByteArray());
                         } catch (Exception e) {
                             keyChannel.send(ByteBuffer.wrap("ERROR: Something went wrong...".getBytes()), inetSocketAddress);
                             ServerLogger.getLogger().warning(e.toString());

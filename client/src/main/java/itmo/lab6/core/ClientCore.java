@@ -44,11 +44,11 @@ public class ClientCore {
                 if (List.of(CommandType.SHOW, CommandType.PRINT_ASCENDING, CommandType.PRINT_DESCENDING).contains(commandType)) {
                     System.out.print("\033[H\033[2J");
                     System.out.flush();
-                    String[] movies = response.split(".\\n\\d.");
-                    SubArrayIterator<String> iterator = new SubArrayIterator<>(movies, 10);
+                    String[] movies = response.split("\\.\n");
+                    SubArrayIterator<String> iterator = new SubArrayIterator<>(movies, 20);
                     while (iterator.hasNext()) {
                         for (String movie : List.of(iterator.next())) {
-                            System.out.println(movie);
+                            System.out.println(movie + ".");
                         }
                         if (iterator.hasNext()) {
                             System.out.println("Press enter to continue, Press q to stop");

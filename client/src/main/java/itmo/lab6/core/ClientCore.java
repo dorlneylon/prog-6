@@ -55,6 +55,7 @@ public class ClientCore {
                             String ans = scanner.nextLine();
                             if (ans.equals("q")) break;
                         }
+                        continue;
                     }
                 }
 

@@ -2,326 +2,182 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-03-28T20:08:36.504231851Z</date>
-  <millis>1680034116504</millis>
-  <nanos>231851</nanos>
+  <date>2023-03-28T16:05:13.185122Z</date>
+  <millis>1680019513185</millis>
+  <nanos>122000</nanos>
   <sequence>0</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.server.UdpServer</class>
   <method>run</method>
-  <thread>1</thread>
+  <thread>18</thread>
   <message>Starting server on port 5050</message>
 </record>
 <record>
-  <date>2023-03-28T20:08:52.617095311Z</date>
-  <millis>1680034132617</millis>
-  <nanos>95311</nanos>
+  <date>2023-03-28T16:05:21.382290Z</date>
+  <millis>1680019521382</millis>
+  <nanos>290000</nanos>
   <sequence>1</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command SHOW from /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:64218</message>
 </record>
 <record>
-  <date>2023-03-28T20:08:53.531291417Z</date>
-  <millis>1680034133531</millis>
-  <nanos>291417</nanos>
+  <date>2023-03-28T16:05:21.403134Z</date>
+  <millis>1680019521403</millis>
+  <nanos>134000</nanos>
   <sequence>2</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 3710 chunks to /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:64218</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:01.020391421Z</date>
-  <millis>1680034141020</millis>
-  <nanos>391421</nanos>
+  <date>2023-03-28T16:05:42.946857Z</date>
+  <millis>1680019542946</millis>
+  <nanos>857000</nanos>
   <sequence>3</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command HELP from /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:53027</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:01.023982940Z</date>
-  <millis>1680034141023</millis>
-  <nanos>982940</nanos>
+  <date>2023-03-28T16:05:42.962881Z</date>
+  <millis>1680019542962</millis>
+  <nanos>881000</nanos>
   <sequence>4</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 2 chunks to /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:53027</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:13.187007773Z</date>
-  <millis>1680034153187</millis>
-  <nanos>7773</nanos>
+  <date>2023-03-28T16:05:56.730983Z</date>
+  <millis>1680019556730</millis>
+  <nanos>983000</nanos>
   <sequence>5</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command EXECUTE_SCRIPT from /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:59433</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:13.227156026Z</date>
-  <millis>1680034153227</millis>
-  <nanos>156026</nanos>
+  <date>2023-03-28T16:05:56.743630Z</date>
+  <millis>1680019556743</millis>
+  <nanos>630000</nanos>
   <sequence>6</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 420 chunks to /127.0.0.1:53424</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:59433</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:38.303720071Z</date>
-  <millis>1680034178303</millis>
-  <nanos>720071</nanos>
+  <date>2023-03-28T16:06:31.756655Z</date>
+  <millis>1680019591756</millis>
+  <nanos>655000</nanos>
   <sequence>7</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command CLEAR from /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:50211</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:38.305796727Z</date>
-  <millis>1680034178305</millis>
-  <nanos>796727</nanos>
+  <date>2023-03-28T16:06:31.760847Z</date>
+  <millis>1680019591760</millis>
+  <nanos>847000</nanos>
   <sequence>8</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 1 chunks to /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:50211</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:48.615303284Z</date>
-  <millis>1680034188615</millis>
-  <nanos>303284</nanos>
+  <date>2023-03-28T16:06:53.494312Z</date>
+  <millis>1680019613494</millis>
+  <nanos>312000</nanos>
   <sequence>9</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command EXECUTE_SCRIPT from /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:50211</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:48.620237266Z</date>
-  <millis>1680034188620</millis>
-  <nanos>237266</nanos>
+  <date>2023-03-28T16:06:53.500883Z</date>
+  <millis>1680019613500</millis>
+  <nanos>883000</nanos>
   <sequence>10</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 420 chunks to /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:50211</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:50.226807716Z</date>
-  <millis>1680034190226</millis>
-  <nanos>807716</nanos>
+  <date>2023-03-28T16:07:53.973666Z</date>
+  <millis>1680019673973</millis>
+  <nanos>666000</nanos>
   <sequence>11</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command CLEAR from /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:57805</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:50.228285981Z</date>
-  <millis>1680034190228</millis>
-  <nanos>285981</nanos>
+  <date>2023-03-28T16:07:53.980553Z</date>
+  <millis>1680019673980</millis>
+  <nanos>553000</nanos>
   <sequence>12</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 1 chunks to /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:57805</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:51.722859063Z</date>
-  <millis>1680034191722</millis>
-  <nanos>859063</nanos>
+  <date>2023-03-28T16:08:01.187907Z</date>
+  <millis>1680019681187</millis>
+  <nanos>907000</nanos>
   <sequence>13</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command INFO from /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:57805</message>
 </record>
 <record>
-  <date>2023-03-28T20:09:51.733769222Z</date>
-  <millis>1680034191733</millis>
-  <nanos>769222</nanos>
+  <date>2023-03-28T16:08:01.193232Z</date>
+  <millis>1680019681193</millis>
+  <nanos>232000</nanos>
   <sequence>14</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 1 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:09:52.921562941Z</date>
-  <millis>1680034192921</millis>
-  <nanos>562941</nanos>
-  <sequence>15</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command HELP from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:09:52.922648777Z</date>
-  <millis>1680034192922</millis>
-  <nanos>648777</nanos>
-  <sequence>16</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 2 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:09.101147376Z</date>
-  <millis>1680034209101</millis>
-  <nanos>147376</nanos>
-  <sequence>17</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command EXECUTE_SCRIPT from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:09.112002372Z</date>
-  <millis>1680034209112</millis>
-  <nanos>2372</nanos>
-  <sequence>18</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 420 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:14.569012649Z</date>
-  <millis>1680034214569</millis>
-  <nanos>12649</nanos>
-  <sequence>19</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command PRINT_ASCENDING from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:14.939560445Z</date>
-  <millis>1680034214939</millis>
-  <nanos>560445</nanos>
-  <sequence>20</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 3710 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:27.003343130Z</date>
-  <millis>1680034227003</millis>
-  <nanos>343130</nanos>
-  <sequence>21</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command EXECUTE_SCRIPT from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:27.007938793Z</date>
-  <millis>1680034227007</millis>
-  <nanos>938793</nanos>
-  <sequence>22</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 420 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:52.934705409Z</date>
-  <millis>1680034252934</millis>
-  <nanos>705409</nanos>
-  <sequence>23</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command CLEAR from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:52.936194113Z</date>
-  <millis>1680034252936</millis>
-  <nanos>194113</nanos>
-  <sequence>24</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 1 chunks to /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:54.469983093Z</date>
-  <millis>1680034254469</millis>
-  <nanos>983093</nanos>
-  <sequence>25</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Received command INFO from /127.0.0.1:40323</message>
-</record>
-<record>
-  <date>2023-03-28T20:10:54.470992858Z</date>
-  <millis>1680034254470</millis>
-  <nanos>992858</nanos>
-  <sequence>26</sequence>
-  <logger>itmo.lab6.server.ServerLogger</logger>
-  <level>INFO</level>
-  <class>itmo.lab6.commands.CommandHandler</class>
-  <method>handlePacket</method>
-  <thread>1</thread>
-  <message>Sending 1 chunks to /127.0.0.1:40323</message>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:57805</message>
 </record>

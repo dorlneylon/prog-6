@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2023-03-28T15:57:01.957336Z</date>
-  <millis>1680019021957</millis>
-  <nanos>336000</nanos>
+  <date>2023-03-28T16:05:13.185122Z</date>
+  <millis>1680019513185</millis>
+  <nanos>122000</nanos>
   <sequence>0</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
@@ -14,75 +14,170 @@
   <message>Starting server on port 5050</message>
 </record>
 <record>
-  <date>2023-03-28T15:57:22.821068Z</date>
-  <millis>1680019042821</millis>
-  <nanos>68000</nanos>
+  <date>2023-03-28T16:05:21.382290Z</date>
+  <millis>1680019521382</millis>
+  <nanos>290000</nanos>
   <sequence>1</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Received command SHOW from /172.28.27.247:58234</message>
+  <message>Received command SHOW from /172.28.27.247:64218</message>
 </record>
 <record>
-  <date>2023-03-28T15:57:22.837259Z</date>
-  <millis>1680019042837</millis>
-  <nanos>259000</nanos>
+  <date>2023-03-28T16:05:21.403134Z</date>
+  <millis>1680019521403</millis>
+  <nanos>134000</nanos>
   <sequence>2</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Sending 1 chunks to /172.28.27.247:58234</message>
+  <message>Sending 5 chunks to /172.28.27.247:64218</message>
 </record>
 <record>
-  <date>2023-03-28T15:57:28.626554Z</date>
-  <millis>1680019048626</millis>
-  <nanos>554000</nanos>
+  <date>2023-03-28T16:05:42.946857Z</date>
+  <millis>1680019542946</millis>
+  <nanos>857000</nanos>
   <sequence>3</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Received command SHOW from /172.28.27.247:55544</message>
+  <message>Received command SHOW from /172.28.27.247:53027</message>
 </record>
 <record>
-  <date>2023-03-28T15:57:28.631483Z</date>
-  <millis>1680019048631</millis>
-  <nanos>483000</nanos>
+  <date>2023-03-28T16:05:42.962881Z</date>
+  <millis>1680019542962</millis>
+  <nanos>881000</nanos>
   <sequence>4</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Sending 1 chunks to /172.28.27.247:55544</message>
+  <message>Sending 5 chunks to /172.28.27.247:53027</message>
 </record>
 <record>
-  <date>2023-03-28T15:59:16.535624Z</date>
-  <millis>1680019156535</millis>
-  <nanos>624000</nanos>
+  <date>2023-03-28T16:05:56.730983Z</date>
+  <millis>1680019556730</millis>
+  <nanos>983000</nanos>
   <sequence>5</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Received command SHOW from /172.28.27.247:64330</message>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:59433</message>
 </record>
 <record>
-  <date>2023-03-28T15:59:16.546145Z</date>
-  <millis>1680019156546</millis>
-  <nanos>145000</nanos>
+  <date>2023-03-28T16:05:56.743630Z</date>
+  <millis>1680019556743</millis>
+  <nanos>630000</nanos>
   <sequence>6</sequence>
   <logger>itmo.lab6.server.ServerLogger</logger>
   <level>INFO</level>
   <class>itmo.lab6.commands.CommandHandler</class>
   <method>handlePacket</method>
   <thread>18</thread>
-  <message>Sending 1 chunks to /172.28.27.247:64330</message>
+  <message>Sending 5 chunks to /172.28.27.247:59433</message>
 </record>
-</log>
+<record>
+  <date>2023-03-28T16:06:31.756655Z</date>
+  <millis>1680019591756</millis>
+  <nanos>655000</nanos>
+  <sequence>7</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:50211</message>
+</record>
+<record>
+  <date>2023-03-28T16:06:31.760847Z</date>
+  <millis>1680019591760</millis>
+  <nanos>847000</nanos>
+  <sequence>8</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:50211</message>
+</record>
+<record>
+  <date>2023-03-28T16:06:53.494312Z</date>
+  <millis>1680019613494</millis>
+  <nanos>312000</nanos>
+  <sequence>9</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:50211</message>
+</record>
+<record>
+  <date>2023-03-28T16:06:53.500883Z</date>
+  <millis>1680019613500</millis>
+  <nanos>883000</nanos>
+  <sequence>10</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:50211</message>
+</record>
+<record>
+  <date>2023-03-28T16:07:53.973666Z</date>
+  <millis>1680019673973</millis>
+  <nanos>666000</nanos>
+  <sequence>11</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Received command SHOW from /172.28.27.247:57805</message>
+</record>
+<record>
+  <date>2023-03-28T16:07:53.980553Z</date>
+  <millis>1680019673980</millis>
+  <nanos>553000</nanos>
+  <sequence>12</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:57805</message>
+</record>
+<record>
+  <date>2023-03-28T16:08:01.187907Z</date>
+  <millis>1680019681187</millis>
+  <nanos>907000</nanos>
+  <sequence>13</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Received command PRINT_ASCENDING from /172.28.27.247:57805</message>
+</record>
+<record>
+  <date>2023-03-28T16:08:01.193232Z</date>
+  <millis>1680019681193</millis>
+  <nanos>232000</nanos>
+  <sequence>14</sequence>
+  <logger>itmo.lab6.server.ServerLogger</logger>
+  <level>INFO</level>
+  <class>itmo.lab6.commands.CommandHandler</class>
+  <method>handlePacket</method>
+  <thread>18</thread>
+  <message>Sending 5 chunks to /172.28.27.247:57805</message>
+</record>

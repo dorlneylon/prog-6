@@ -48,7 +48,7 @@ public class ClientCore {
                     SubArrayIterator<String> iterator = new SubArrayIterator<>(movies, 20);
                     while (iterator.hasNext()) {
                         for (String movie : List.of(iterator.next())) {
-                            System.out.println(movie + ".");
+                            System.out.println(movie + (iterator.hasNext() ? "." : ""));
                         }
                         if (iterator.hasNext()) {
                             System.out.println("Press enter to continue, Press q to stop");

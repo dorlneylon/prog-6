@@ -9,6 +9,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.Field;
+import java.util.NoSuchElementException;
 
 public class ArgumentParser extends AbstractParser {
     public ArgumentParser(String[] movieFields) {
@@ -52,6 +53,9 @@ public class ArgumentParser extends AbstractParser {
             } catch (BadArgumentException e) {
                 System.err.println(e.getMessage());
                 throw new ObjectParsingException(objectType);
+            } catch (NoSuchElementException e) {
+                System.out.printf("Ctrl-D detected.\n Shutting the client down...\n", e.getMessage());
+                System.exit(1);
             }
         }
         return (T) builderObject.build();

@@ -142,11 +142,11 @@ public abstract class AbstractParser {
      * @throws BadArgumentException if field's value is not valid
      */
     protected void readString(Field field, Builder builder) throws BadArgumentException {
-        String value;
+        String value = null;
         try {
             value = scanner.nextLine();
         } catch (NoSuchElementException e) {
-            throw new BadArgumentException("Unable to read value for the field: " + field);
+            throw new NoSuchElementException("No line found");
         }
         try {
             checkString(field, value); // Throws an IllegalArgumentException
@@ -198,6 +198,8 @@ public abstract class AbstractParser {
             value = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
         } catch (ParseException e) {
             throw new BadArgumentException("Invalid date format for the field: " + field.getName());
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException("No line found");
         }
         if (value != null) {
             setValueToField(field, builder, value);
@@ -209,7 +211,7 @@ public abstract class AbstractParser {
         try {
             value = scanner.nextLine();
         } catch (NoSuchElementException e) {
-            throw new ObjectParsingException(field.getType());
+            throw new NoSuchElementException("");
         }
         try {
             setValueToField(field, builder, stringToEnum(field, value));

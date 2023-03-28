@@ -24,10 +24,10 @@ public final class CollectionValidator {
         Boolean receivedStatus = Boolean.parseBoolean(connector.receive());
         if (command.equals(CommandType.INSERT)) {
             // True if key does not exist
-            return Boolean.TRUE.equals(receivedStatus);
+            return receivedStatus;
         } else if (command.equals(CommandType.UPDATE) || command.equals(CommandType.REPLACE_IF_LOWER)) {
             // True if key exists
-            return Boolean.FALSE.equals(receivedStatus);
+            return !receivedStatus;
         }
         return false;
     }

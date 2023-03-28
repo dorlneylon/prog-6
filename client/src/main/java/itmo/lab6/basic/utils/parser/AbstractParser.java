@@ -146,7 +146,6 @@ public abstract class AbstractParser {
         try {
             value = scanner.nextLine();
         } catch (NoSuchElementException e) {
-            System.exit(1);
             throw new BadArgumentException("Unable to read value for the field: " + field);
         }
         try {
@@ -171,7 +170,6 @@ public abstract class AbstractParser {
         try {
             value = NumberFormat.getInstance().parse(scanner.nextLine());
         } catch (ParseException e) {
-            System.exit(1);
             throw new BadArgumentException("Invalid number format");
         }
         value = switch (numType) {
@@ -199,7 +197,6 @@ public abstract class AbstractParser {
         try {
             value = new SimpleDateFormat("dd.MM.yyyy").parse(scanner.nextLine());
         } catch (ParseException e) {
-            System.exit(1);
             throw new BadArgumentException("Invalid date format for the field: " + field.getName());
         }
         if (value != null) {
@@ -212,7 +209,6 @@ public abstract class AbstractParser {
         try {
             value = scanner.nextLine();
         } catch (NoSuchElementException e) {
-            System.exit(1);
             throw new ObjectParsingException(field.getType());
         }
         try {

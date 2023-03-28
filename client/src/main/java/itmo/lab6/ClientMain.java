@@ -2,8 +2,10 @@ package itmo.lab6;
 
 import itmo.lab6.core.ClientCore;
 
+import java.io.EOFException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.NoSuchElementException;
 
 public class ClientMain {
     private static final InetAddress serverAddress;
@@ -20,6 +22,10 @@ public class ClientMain {
 
     public static void main(String[] args) {
         ClientCore core = new ClientCore(serverAddress, serverPort);
-        core.run();
+        try {
+            core.run();
+        } catch (NoSuchElementException e) {
+            System.out.printf("Fatal error: %s.\n Shutting the client down...\n", e.getMessage());
+        }
     }
 }

@@ -32,7 +32,7 @@ public final class CommandFactory {
     public static Command createCommand(CommandType type, String[] args) {
         return switch (type) {
             case EXIT -> {
-                 System.out.println("Shutting down...");
+                System.out.println("Shutting down...");
                 System.exit(0);
                 yield null;
             }
